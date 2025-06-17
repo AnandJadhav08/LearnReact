@@ -1,9 +1,40 @@
-import React from 'react';
-import { ScrollView, StyleSheet, View} from 'react-native';
-import StudentCards from '../components/StudentCards';
-import students from '../utils/StudentData';
 
-// export default function Index() {
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './Screens/HomeScreen';
+import ProfileScreen from './Screens/ProfileScreen';
+import DocumentScreen from './Screens/DocumentScreen';
+
+export type RootStackParamList = {
+  navigate: any;
+  Home: undefined;
+  Profile: undefined;
+  Document: undefined;
+};
+
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+const App = () => {
+   return (
+ <Stack.Navigator initialRouteName="Home">
+  <Stack.Screen name="Home" component={HomeScreen} />
+  <Stack.Screen name="Profile" component={ProfileScreen} />
+  <Stack.Screen name="Document" component={DocumentScreen} />
+ </Stack.Navigator>
+ );
+};
+
+
+
+export default App;
+
+// import { ScrollView, StyleSheet, View} from 'react-native';
+
+
+// import StudentCards from '../../components/StudentCards';
+// import students from '../../utils/StudentData';
+
+// app1 // export default function Index() {
 //   const images  = [
 //     require('../assets/images/donut.jpg'),
 //     require('../assets/images/pizza.jpg'),
@@ -152,30 +183,30 @@ import students from '../utils/StudentData';
 // });
 
 
-export default function Index() {
-  return (
-    <View style={{ flex: 1, backgroundColor: '#4d4d4d', padding:0,height: '100%', width: '100%' }}>
-    <ScrollView contentContainerStyle={styles.container}>
-      {students.map((student) => (
-        <StudentCards
-        key={student.id}
-        Name={student.Name}
-        Stream={student.Stream}
-        Qualities={student.Qualities}
-        imageUri={student.imageUri}
-        description={student.description}
-        />
-      ))}
-    </ScrollView>
-      </View>
-  );
-}
+// app2 // export default function Index() {
+//   return (
+//     <View style={{ flex: 1, backgroundColor: '#4d4d4d', padding:0,height: '100%', width: '100%' }}>
+//     <ScrollView contentContainerStyle={styles.container}>
+//       {students.map((student) => (
+//         <StudentCards
+//         key={student.id}
+//         Name={student.Name}
+//         Stream={student.Stream}
+//         Qualities={student.Qualities}
+//         imageUri={student.imageUri}
+//         description={student.description}
+//         />
+//       ))}
+//     </ScrollView>
+//       </View>
+//   );
+// }
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    gap: 30,
+// const styles = StyleSheet.create({
+//   container: {
+//     padding: 20,
+//     gap: 30,
 
-  },
+//   },
   
-});
+// });

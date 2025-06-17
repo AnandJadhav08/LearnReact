@@ -37,14 +37,15 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderRadius: 16,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+    paddingVertical: 0,
+    paddingHorizontal: 0,
     alignItems: 'center',
     elevation: 4,
     shadowColor: '#000', 
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
+    margin: 10,
   },
   imageContainer: {
     marginBottom: 12,

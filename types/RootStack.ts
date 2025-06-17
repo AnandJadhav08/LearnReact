@@ -1,0 +1,7 @@
+
+export type RootStackParamList = {
+  navigate: any;
+  Home: undefined;
+  Profile: undefined;
+  Document: undefined;
+};
