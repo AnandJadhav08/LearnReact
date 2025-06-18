@@ -1,56 +1,56 @@
-// src/screens/HomeScreen.tsx
-
-import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import DocumentScreen from '../Screens/DocumentScreen';
+import React from 'react'
+import { View, Button, ScrollView, StyleSheet } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import HomePagesData from '../../utils/HomePagesData'
 
 export type RootStackParamList = {
-  navigate: any;
-  Home: undefined;
-  Profile: undefined;
-  Document: undefined;
-};
+  Home: undefined
+  Profile: undefined
+  Document: { topic: string }
+}
 
-
-type HomeNavProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
-
-
-const topics = [
-  { title: 'Student Profile', screen: 'Profile' },
-  { title: 'JavaScript Basics', screen: 'Document' },
-  { title: 'JavaScript Data Types', screen: 'Document' },
-  { title: 'JavaScript Objects', screen: 'Document' },
-]
+type HomeNavProp = NativeStackNavigationProp<RootStackParamList, 'Home'>
 
 const HomeScreen: React.FC = () => {
-  const navigation = useNavigation<HomeNavProp>();
+  const navigation = useNavigation<HomeNavProp>()
 
   return (
     <View style={styles.container}>
-      {topics.map(({ title, screen }, idx) => (
-        <View key={idx} style={styles.buttonWrapper}>
-          <Button
-            title={title}
-           onPress={() =>
-              navigation.navigate(screen, screen === 'Document' ? { topic: title } : undefined)
-            }
-          />
-        </View>
-      ))}
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator
+        persistentScrollbar
+      >
+        {HomePagesData.map(({ title, screen }, idx) => (
+          <View key={idx} style={styles.buttonWrapper}>
+            <Button
+              title={title}
+              onPress={() =>
+                navigation.navigate(
+                  screen as keyof RootStackParamList,
+                  screen === 'Document' ? { topic: title } : undefined
+                )
+              }
+            />
+          </View>
+        ))}
+      </ScrollView>
     </View>
   )
-};
-export default HomeScreen;
+}
+
+export default HomeScreen
 
 const styles = StyleSheet.create({
-   container: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
     paddingHorizontal: 16,
+  },
+  scrollContent: {
+    paddingVertical: 16,
   },
   buttonWrapper: {
     marginVertical: 8,
   },
-});
+})

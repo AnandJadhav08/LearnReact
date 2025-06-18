@@ -4,12 +4,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './Screens/HomeScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import DocumentScreen from './Screens/DocumentScreen';
+import CalculatorScreen from './Screens/CalculatorScreen';
 
 export type RootStackParamList = {
   navigate: any;
   Home: undefined;
   Profile: undefined;
   Document: undefined;
+  Calculator: undefined;
 };
 
 
@@ -20,6 +22,7 @@ const App = () => {
   <Stack.Screen name="Home" component={HomeScreen} />
   <Stack.Screen name="Profile" component={ProfileScreen} />
   <Stack.Screen name="Document" component={DocumentScreen} />
+  <Stack.Screen name="Calculator" component={CalculatorScreen}/>
  </Stack.Navigator>
  );
 };

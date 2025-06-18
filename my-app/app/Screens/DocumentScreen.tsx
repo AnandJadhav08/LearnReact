@@ -1,13 +1,14 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button,ScrollView, StyleSheet, Text, View } from 'react-native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import TopicData from '../../utils/TopicData'
 
 type RootStackParamList = {
   navigate: any;
-  Home: undefined
-  Profile: undefined
-  Document: undefined
+  Home: undefined;
+  Profile: undefined;
+  Document: undefined;
 }
 type DocumentScreenNavigationProp = NativeStackNavigationProp<RootStackParamList,'Document'>
 
@@ -17,8 +18,24 @@ const DocumentScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> Document Screen</Text>
-      <Button title="Go Back" onPress={() => navigation.goBack()} />
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator
+        persistentScrollbar
+      >
+        {TopicData.map(({ title, screen }, idx) => (
+          <View key={idx} style={styles.buttonWrapper}>
+            <Button
+              title={title}
+              onPress={() =>
+                navigation.navigate(
+ 'Document'
+                )
+              }
+            />
+          </View>
+        ))}
+      </ScrollView>
     </View>
   )
 }
@@ -34,5 +51,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+   scrollContent: {
+    paddingVertical: 16,
+  },
+  buttonWrapper: {
+    marginVertical: 8,
   },
 })
