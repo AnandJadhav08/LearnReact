@@ -5,9 +5,10 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import HomePagesData from '../../utils/HomePagesData'
 
 export type RootStackParamList = {
-  Home: undefined
-  Profile: undefined
-  Document: { topic: string }
+    navigate: any;
+  Home: undefined;
+  AddContactScreen: undefined;
+  ContactList: undefined
 }
 
 type HomeNavProp = NativeStackNavigationProp<RootStackParamList, 'Home'>
@@ -27,13 +28,12 @@ const HomeScreen: React.FC = () => {
             <Button
               title={title}
               onPress={() => {
-                if (screen === 'Document') {
-                  navigation.navigate('Document', { topic: title })
+                if (screen === 'Home') {
+                  navigation.navigate('Home')
                 } else {
-                  navigation.navigate(screen as 'Home' | 'Profile' )
+                  navigation.navigate(screen as 'ContactList' | 'AddContactScreen')
                 }
-              }}
-            />
+              }}            />
           </View>
         ))}      </ScrollView>
     </View>

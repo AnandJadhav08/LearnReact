@@ -1,46 +1,22 @@
-
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './Screens/HomeScreen';
-import ProfileScreen from './Screens/ProfileScreen';
-import DocumentScreen from './Screens/DocumentScreen';
-import CalculatorScreen from './Screens/CalculatorScreen';
-import TaskScreen from './Screens/TaskScreen';
-//import LoginScreen from './Screens/LoginScreen';
-
-export type RootStackParamList = {
-  navigate: any;
-  Home: undefined;
-  Profile: undefined;
-  Document: undefined;
-  Calculator: undefined;
-  Task:undefined;
-};
+// import React from 'react'
+// import { useNavigation } from '@react-navigation/native'
+// import {Alert, ScrollView, Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native'
+// import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
-const App = () => {
-   return (
- <Stack.Navigator initialRouteName="Home">
-  <Stack.Screen name="Home" component={HomeScreen} />
-  <Stack.Screen name="Profile" component={ProfileScreen} />
-  <Stack.Screen name="Document" component={DocumentScreen} />
-  <Stack.Screen name="Calculator" component={CalculatorScreen}/>
-  <Stack.Screen name="Task" component={TaskScreen}/>
-
- </Stack.Navigator>
- );
-};
+// type RootStackParamList = {
+//   navigate: any;
+//   Home: undefined;
+//   Profile: undefined;
+//   Document: undefined;
+//   Login: undefined
+// }
+// type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList,'Login'>
 
 
-export default App;
-
-// import { ScrollView, StyleSheet, View} from 'react-native';
-// import StudentCards from '../../components/StudentCards';
-// import students from '../../utils/StudentData';
-
-// app1 // export default function Index() {
-//   const images  = [
+// const LoginScreen: React.FC = () => {
+//   const navigation = useNavigation<LoginScreenNavigationProp>()
+//    const images  = [
 //     require('../assets/images/donut.jpg'),
 //     require('../assets/images/pizza.jpg'),
 //     require('../assets/images/tost.jpg'),
@@ -48,8 +24,7 @@ export default App;
 //     require('../assets/images/cake.jpg'),
 //     require('../assets/images/burger.jpg'),
 //   ];
-
-//   return (
+//  return (
 //     <View
 //       style={{
 //         flex: 1,
@@ -98,9 +73,10 @@ export default App;
 //       </TouchableOpacity>
 
 //     </View>
-//   );
+  
+//    )
 // }
-
+// export default LoginScreen;
 // const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,
@@ -185,33 +161,4 @@ export default App;
 //     borderRadius: 10, 
 //     marginRight: 10,
 //   }
-// });
-
-
-// app2 // export default function Index() {
-//   return (
-//     <View style={{ flex: 1, backgroundColor: '#4d4d4d', padding:0,height: '100%', width: '100%' }}>
-//     <ScrollView contentContainerStyle={styles.container}>
-//       {students.map((student) => (
-//         <StudentCards
-//         key={student.id}
-//         Name={student.Name}
-//         Stream={student.Stream}
-//         Qualities={student.Qualities}
-//         imageUri={student.imageUri}
-//         description={student.description}
-//         />
-//       ))}
-//     </ScrollView>
-//       </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     padding: 20,
-//     gap: 30,
-
-//   },
-  
 // });

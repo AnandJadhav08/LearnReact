@@ -5,4 +5,6 @@ export type RootStackParamList = {
   Profile: undefined;
   Document: undefined;
   Calculator: undefined;
+  Task: undefined;
+ // Login: undefined;
 };
