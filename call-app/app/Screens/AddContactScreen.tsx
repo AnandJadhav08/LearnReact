@@ -19,6 +19,7 @@ const AddContactScreen: React.FC = () => {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
+  const [workplace, setWorkplace] = useState('')
 
   const handleSubmit = () => {
     if (!name.trim() || !phone.trim()) {
@@ -26,10 +27,10 @@ const AddContactScreen: React.FC = () => {
       return
     }
 
-    const newContact = { name, phone, email }
+    const newContact = { name, phone, email, workplace }
     addContact(newContact)
     Alert.alert('Contact Saved', `${name}\n${phone}\n${email || 'No email'}`)
-    setName(''); setPhone(''); setEmail('')
+    setName(''); setPhone(''); setEmail(''); 
     navigation.navigate('ContactList')
   }
 
@@ -60,6 +61,14 @@ const AddContactScreen: React.FC = () => {
         onChangeText={setEmail}
         placeholder="Enter email (optional)"
         keyboardType="email-address"
+        style={styles.input}
+      />
+
+      <Text style={styles.label}>Workplace</Text>
+      <TextInput
+        value={workplace}
+        onChangeText={setWorkplace}
+        placeholder="Enter Workplace (optional)"
         style={styles.input}
       />
 
