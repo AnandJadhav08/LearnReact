@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
+import {View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import TaskData from '../../utils/TaskData'
@@ -10,7 +10,7 @@ export type RootStackParamList = {
   Document: { topic: string }
   Calculator: undefined
   Task: undefined
- // Login: undefined
+  Login: undefined
 }
 
 type TaskNavProp = NativeStackNavigationProp<RootStackParamList, 'Task'>
@@ -21,23 +21,25 @@ const TaskScreen: React.FC = () => {
   const navigation = useNavigation<TaskNavProp>()
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
+    <ScrollView>
       <Text style={styles.title}>Tasks List</Text>
       {TaskData.map(({title,screen} ,index) => (
         <TouchableOpacity
-          key={index}
-          style={[styles.card, { backgroundColor: '#96add9' }]}
-          onPress={() => {
-            if (screen === 'Document') {
+        key={index}
+        style={[styles.card, { backgroundColor: '#fff' }]}
+        onPress={() => {
+          if (screen === 'Document') {
               navigation.navigate('Document', { topic: title })
             } else {
-              navigation.navigate(screen as 'Home' | 'Profile')
+              navigation.navigate(screen as 'Home' | 'Profile'| 'Login')
             }
           }}
-        >
+          >
           <Text style={styles.cardText}>{title}</Text>
         </TouchableOpacity>
       ))}    </ScrollView>
+      </View>
   )
 }
 
@@ -47,6 +49,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     alignItems: 'stretch',
+    backgroundColor: '#ffeccc',
   },
   title: {
     fontSize: 24,

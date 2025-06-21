@@ -6,7 +6,8 @@ import ProfileScreen from './Screens/ProfileScreen';
 import DocumentScreen from './Screens/DocumentScreen';
 import CalculatorScreen from './Screens/CalculatorScreen';
 import TaskScreen from './Screens/TaskScreen';
-//import LoginScreen from './Screens/LoginScreen';
+import UseEffectScreen from './Screens/useEffectScreen';
+import LoginScreen from './Screens/LoginScreen';
 
 export type RootStackParamList = {
   navigate: any;
@@ -15,6 +16,8 @@ export type RootStackParamList = {
   Document: undefined;
   Calculator: undefined;
   Task:undefined;
+  UseEffect:undefined;
+  Login: undefined;
 };
 
 
@@ -27,6 +30,8 @@ const App = () => {
   <Stack.Screen name="Document" component={DocumentScreen} />
   <Stack.Screen name="Calculator" component={CalculatorScreen}/>
   <Stack.Screen name="Task" component={TaskScreen}/>
+  <Stack.Screen name="UseEffect" component={UseEffectScreen}/>
+  <Stack.Screen name="Login" component={LoginScreen}/>
 
  </Stack.Navigator>
  );

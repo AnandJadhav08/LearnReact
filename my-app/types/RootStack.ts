@@ -6,5 +6,6 @@ export type RootStackParamList = {
   Document: undefined;
   Calculator: undefined;
   Task: undefined;
- // Login: undefined;
+  useEffect: undefined
+  Login: undefined;
 };
