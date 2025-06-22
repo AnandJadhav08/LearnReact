@@ -4,7 +4,7 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Button,ScrollView, StyleSheet, Text, View } from 'react-native'
 import StudentCards from '../../components/StudentCards';
-import students from '../../utils/StudentData';
+import StudentData from '../../utils/StudentData';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 type RootStackParamList = {
@@ -23,7 +23,7 @@ const ProfileScreen: React.FC = () => {
 
       <View style={styles.listContainer}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
-          {students.map((student) => (
+          {StudentData.map((student) => (
             <StudentCards
               key={student.id}
               Name={student.Name}
