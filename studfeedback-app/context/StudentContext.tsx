@@ -13,7 +13,9 @@ export type StudentCardProps = {
 type StudentContextType = {
   students: StudentCardProps[];
   addStudent: (student: StudentCardProps) => void;
+  updateStudent: (student: StudentCardProps) => void;
 };
+
 
 const StudentContext = createContext<StudentContextType | undefined>(undefined);
 
@@ -51,14 +53,21 @@ export const StudentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const addStudent = (student: StudentCardProps) => {
     setStudents(prev => [...prev, student]);
   };
+  
+const updateStudent = (updatedStudent: StudentCardProps) => {
+  setStudents(prev =>
+    prev.map(student => (student.id === updatedStudent.id ? updatedStudent : student))
+  );
+};
 
+
+  
   return (
-    <StudentContext.Provider value={{ students, addStudent }}>
+    <StudentContext.Provider value={{ students, addStudent, updateStudent }}>
       {children}
     </StudentContext.Provider>
   );
 };
-
 export const useStudents = () => {
   const context = useContext(StudentContext);
   if (!context) throw new Error('useStudents must be used within a StudentProvider');

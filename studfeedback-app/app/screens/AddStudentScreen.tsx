@@ -4,29 +4,26 @@ import {  TextInput,  Button,  ScrollView,  StyleSheet,  View,  Text,  Touchable
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useStudents } from '../../context/StudentContext'; 
 
-// Define navigation type
+
 export type RootStackParamList = {
   Home: undefined;
   AddStudent: undefined;
 };
 
-type AddStudentScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'AddStudent'
->;
+type AddStudentScreenNavigationProp = NativeStackNavigationProp<RootStackParamList,'AddStudent'>;
 
 const AddStudentScreen: React.FC = () => {
   const navigation = useNavigation<AddStudentScreenNavigationProp>();
-  const { addStudent } = useStudents(); // ✅ Get method from context
+  const { addStudent } = useStudents(); 
 
-  // Form state
+
   const [name, setName] = useState('');
   const [course, setCourse] = useState('');
   const [roll, setRoll] = useState('');
   const [feedback, setFeedback] = useState('');
   const [rating, setRating] = useState('');
 
-  // Handle form submit
+
   const handleSubmit = () => {
     if (!name.trim() || !course.trim() || !roll.trim()) {
       Alert.alert('Missing Info', 'Name, Course, and Roll Number are required.');
@@ -34,7 +31,7 @@ const AddStudentScreen: React.FC = () => {
     }
 
     const newStudent = {
-      id: Date.now().toString(), // unique ID
+      id: Date.now().toString(),
       name,
       course,
       roll,
@@ -42,17 +39,18 @@ const AddStudentScreen: React.FC = () => {
       rating: parseFloat(rating) || 0,
     };
 
-    addStudent(newStudent); // ✅ Save to context
+    addStudent(newStudent);
     Alert.alert('Success', 'Student details saved.');
 
-    // Reset form
+ 
+
     setName('');
     setCourse('');
     setRoll('');
     setFeedback('');
     setRating('');
 
-    navigation.navigate('Home'); // ✅ Go back to Home
+    navigation.navigate('Home'); 
   };
 
   return (
@@ -83,7 +81,7 @@ const AddStudentScreen: React.FC = () => {
         style={styles.input}
       />
 
-      <Text style={styles.label}>Feedback</Text>
+      {/* <Text style={styles.label}>Feedback</Text>
       <TextInput
         value={feedback}
         onChangeText={setFeedback}
@@ -100,7 +98,7 @@ const AddStudentScreen: React.FC = () => {
         placeholder="Enter rating"
         keyboardType="numeric"
         style={styles.input}
-      />
+      /> */}
 
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitText}>Save Student Details</Text>
