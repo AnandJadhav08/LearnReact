@@ -11,6 +11,7 @@ export type RootStackParamList = {
   Calculator: undefined
   Task: undefined
   Login: undefined
+  Flatlist: undefined
 }
 
 type TaskNavProp = NativeStackNavigationProp<RootStackParamList, 'Task'>
@@ -32,7 +33,7 @@ const TaskScreen: React.FC = () => {
           if (screen === 'Document') {
               navigation.navigate('Document', { topic: title })
             } else {
-              navigation.navigate(screen as 'Home' | 'Profile'| 'Login')
+              navigation.navigate(screen as 'Home' | 'Profile'| 'Login'| 'Flatlist')
             }
           }}
           >

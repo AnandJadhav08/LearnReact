@@ -8,6 +8,7 @@ import CalculatorScreen from './Screens/CalculatorScreen';
 import TaskScreen from './Screens/TaskScreen';
 import UseEffectScreen from './Screens/useEffectScreen';
 import LoginScreen from './Screens/LoginScreen';
+import FlatlistScreen from './Screens/FlatlistScreen';
 
 export type RootStackParamList = {
   navigate: any;
@@ -18,6 +19,7 @@ export type RootStackParamList = {
   Task:undefined;
   UseEffect:undefined;
   Login: undefined;
+  Flatlist: undefined;
 };
 
 
@@ -32,6 +34,7 @@ const App = () => {
   <Stack.Screen name="Task" component={TaskScreen}/>
   <Stack.Screen name="UseEffect" component={UseEffectScreen}/>
   <Stack.Screen name="Login" component={LoginScreen}/>
+  <Stack.Screen name="Flatlist" component={FlatlistScreen}/>
 
  </Stack.Navigator>
  );
