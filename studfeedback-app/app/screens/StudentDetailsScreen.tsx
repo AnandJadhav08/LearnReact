@@ -19,6 +19,7 @@ const StudentDetailsScreen: React.FC = () => {
   const [roll, setRoll] = useState(student.roll);
   const [feedback, setFeedback] = useState(student.feedback);
   const [rating, setRating] = useState(String(student.rating));
+  const [ratingError, setRatingError] = useState('');
 
   const handleUpdate = () => {
     if (!name || !course || !roll) {
@@ -34,11 +35,11 @@ const StudentDetailsScreen: React.FC = () => {
       feedback,
       rating: parseFloat(rating),
     });
-
+    
     Alert.alert('Updated', 'Student information updated.');
     setIsEditing(false);
   };
-
+  
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.header}>Student Details</Text>
@@ -54,8 +55,24 @@ const StudentDetailsScreen: React.FC = () => {
           <Label title="Feedback" />
           <TextInput style={[styles.input, { height: 80 }]} multiline value={feedback} onChangeText={setFeedback} />
           <Label title="Rating (0–5)" />
-          <TextInput style={styles.input} value={rating} onChangeText={setRating} keyboardType="numeric" />
-
+          <TextInput
+            style={styles.input}
+            value={rating}
+            onChangeText={(text) => {
+              setRating(text);
+              const numeric = parseInt(text, 10);
+              
+              if (text.trim() === '') {
+                setRatingError('Rating is required');
+              } else if (isNaN(numeric) || numeric < 1 || numeric > 5) {
+                setRatingError('Rating must be between 1 and 5');
+              } else {
+                setRatingError('');
+              }
+            }}
+            keyboardType="numeric"
+            />
+            {ratingError ? <Text style={{ color: 'red' }}>{ratingError}</Text> : null}
           <View style={styles.buttonRow}>
             <Button title="Save Changes" onPress={handleUpdate} />
             <Button title="Cancel" color="#999" onPress={() => setIsEditing(false)} />

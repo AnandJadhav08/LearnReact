@@ -33,7 +33,36 @@ const DATA = [
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
     title: 'Third Item',
   },
+  {
+    id: '1c9c4f9a-dfa2-42f4-b05c-8a6d831a2e34',
+    title: 'Fourth Item',
+  },
+  {
+    id: '7e33f2b1-50a4-43e7-a3fb-bf0a7c2b07d1',
+    title: 'Fifth Item',
+  },
+  {
+    id: 'b3ac5e76-bca4-46d9-86db-9b8b3ac4573e',
+    title: 'Sixth Item',
+  },
+  {
+    id: 'cb14c3f2-d19e-4e62-8af1-0842742b867c',
+    title: 'Seventh Item',
+  },
+  {
+    id: '4f2f0ac8-176b-4a8e-963b-8031e8944f22',
+    title: 'Eighth Item',
+  },
+  {
+    id: 'ac7ba9a6-7c35-4a35-98ea-1cc4a3886d3b',
+    title: 'Ninth Item',
+  },
+  {
+    id: 'b82766c3-c205-4f7d-b9ce-b5eec6e7bc33',
+    title: 'Tenth Item',
+  },
 ];
+
 
 type ItemProps = { title: string };
 
@@ -47,13 +76,13 @@ const FlatlistScreen: React.FC = () => {
   const navigation = useNavigation<FlatlistScreenNavigationProp>();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
+    
+      <FlatList style={styles.container}
         data={DATA}
         renderItem={({ item }) => <Item title={item.title} />}
         keyExtractor={item => item.id}
       />
-    </SafeAreaView>
+
   );
 };
 

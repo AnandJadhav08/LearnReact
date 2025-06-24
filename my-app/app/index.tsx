@@ -1,6 +1,8 @@
 
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+//import { createNativeStackNavigator } from '@react-navigation/native-stack';
+//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './Screens/HomeScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import DocumentScreen from './Screens/DocumentScreen';
@@ -23,22 +25,63 @@ export type RootStackParamList = {
 };
 
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+// const Stack = createNativeStackNavigator<RootStackParamList>();
+// const App = () => {
+//    return (
+//  <Stack.Navigator initialRouteName="Home">
+//   <Stack.Screen name="Home" component={HomeScreen} />
+//   <Stack.Screen name="Profile" component={ProfileScreen} />
+//   <Stack.Screen name="Document" component={DocumentScreen} />
+//   <Stack.Screen name="Calculator" component={CalculatorScreen}/>
+//   <Stack.Screen name="Task" component={TaskScreen}/>
+//   <Stack.Screen name="UseEffect" component={UseEffectScreen}/>
+//   <Stack.Screen name="Login" component={LoginScreen}/>
+//   <Stack.Screen name="Flatlist" component={FlatlistScreen}/>
+//  </Stack.Navigator>
+//  );
+// };
+
+
+
+
+const Drawer = createDrawerNavigator();
 const App = () => {
    return (
- <Stack.Navigator initialRouteName="Home">
-  <Stack.Screen name="Home" component={HomeScreen} />
-  <Stack.Screen name="Profile" component={ProfileScreen} />
-  <Stack.Screen name="Document" component={DocumentScreen} />
-  <Stack.Screen name="Calculator" component={CalculatorScreen}/>
-  <Stack.Screen name="Task" component={TaskScreen}/>
-  <Stack.Screen name="UseEffect" component={UseEffectScreen}/>
-  <Stack.Screen name="Login" component={LoginScreen}/>
-  <Stack.Screen name="Flatlist" component={FlatlistScreen}/>
+ <Drawer.Navigator initialRouteName="Home">
+  <Drawer.Screen name="Home" component={HomeScreen} />
+  <Drawer.Screen name="Profile" component={ProfileScreen} />
+  <Drawer.Screen name="Document" component={DocumentScreen} />
+  <Drawer.Screen name="Calculator" component={CalculatorScreen}/>
+  <Drawer.Screen name="Task" component={TaskScreen}/>
+  <Drawer.Screen name="UseEffect" component={UseEffectScreen}/>
+  <Drawer.Screen name="Login" component={LoginScreen}/>
+  <Drawer.Screen name="Flatlist" component={FlatlistScreen}/>
+ </Drawer.Navigator>
 
- </Stack.Navigator>
+ 
  );
 };
+
+
+
+
+
+
+// const Tab = createBottomTabNavigator();
+// const App = () => {
+//    return (
+//  <Tab.Navigator initialRouteName="Home">
+//   <Tab.Screen name="Home" component={HomeScreen} />
+//   <Tab.Screen name="Profile" component={ProfileScreen} />
+//   <Tab.Screen name="Document" component={DocumentScreen} />
+//   <Tab.Screen name="Calculator" component={CalculatorScreen}/>
+//   <Tab.Screen name="Task" component={TaskScreen}/>
+//   <Tab.Screen name="UseEffect" component={UseEffectScreen}/>
+//   <Tab.Screen name="Login" component={LoginScreen}/>
+//   <Tab.Screen name="Flatlist" component={FlatlistScreen}/>
+//  </Tab.Navigator>
+//  );
+// };
 
 
 export default App;

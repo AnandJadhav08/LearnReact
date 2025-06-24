@@ -33,7 +33,7 @@ const TaskScreen: React.FC = () => {
           if (screen === 'Document') {
               navigation.navigate('Document', { topic: title })
             } else {
-              navigation.navigate(screen as 'Home' | 'Profile'| 'Login'| 'Flatlist')
+              navigation.navigate(screen as 'Home' | 'Profile'| 'Login'| 'Flatlist'|'Calculator')
             }
           }}
           >
