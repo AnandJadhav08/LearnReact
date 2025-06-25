@@ -1,19 +1,38 @@
 import React from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { View, Button, ScrollView, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import HomePagesData from '../../utils/HomePagesData'
 
-export type RootStackParamList = {
-  Home: undefined
-  Profile: undefined
-  Document: { topic: string }
+
+import CalculatorScreen from './CalculatorScreen'
+import TaskScreen from './TaskScreen'
+import UseEffectScreen from './useEffectScreen'
+import LoginScreen from './LoginScreen'
+import FlatlistScreen from './FlatlistScreen'
+
+
+export type HomeStackParamList = {
+  HomeMain: undefined
+  Calculator: undefined
+  Task: undefined
+  UseEffect: undefined
+  Login: undefined
+  Flatlist: undefined
 }
 
-type HomeNavProp = NativeStackNavigationProp<RootStackParamList, 'Home'>
+type HomeMainNavProp = NativeStackNavigationProp<HomeStackParamList, 'HomeMain'>
 
-const HomeScreen: React.FC = () => {
-  const navigation = useNavigation<HomeNavProp>()
+const HomeStack = createNativeStackNavigator<HomeStackParamList>()
+
+
+const HomeMainScreen: React.FC = () => {
+  const navigation = useNavigation<HomeMainNavProp>()
+
+ 
+  const homeStackScreens = ['Calculator', 'Task', 'UseEffect', 'Login', 'Flatlist']
+  const filteredPages = HomePagesData.filter(page => homeStackScreens.includes(page.screen))
 
   return (
     <View style={styles.container}>
@@ -22,21 +41,86 @@ const HomeScreen: React.FC = () => {
         showsVerticalScrollIndicator
         persistentScrollbar
       >
-        {HomePagesData.map(({ title, screen }, idx) => (
+        {filteredPages.map(({ title, screen }, idx) => (
           <View key={idx} style={styles.buttonWrapper}>
             <Button
               title={title}
               onPress={() => {
-                if (screen === 'Document') {
-                  navigation.navigate('Document', { topic: title })
-                } else {
-                  navigation.navigate(screen as 'Home' | 'Profile' )
-                }
+                navigation.navigate(screen as keyof HomeStackParamList)
               }}
             />
           </View>
-        ))}      </ScrollView>
+        ))}
+      </ScrollView>
     </View>
+  )
+}
+
+
+const HomeScreen: React.FC = () => {
+  return (
+    <HomeStack.Navigator 
+      initialRouteName="HomeMain"
+      screenOptions={{
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: '#6200ea',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <HomeStack.Screen 
+        name="HomeMain" 
+        component={HomeMainScreen}
+        options={{ 
+          title: 'Home',
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen 
+        name="Calculator" 
+        component={CalculatorScreen}
+        options={{ 
+          title: 'Calculator',
+          headerBackTitle: 'Home'
+        }}
+      />
+      <HomeStack.Screen 
+        name="Task" 
+        component={TaskScreen}
+        options={{ 
+          title: 'Tasks',
+          headerBackTitle: 'Home'
+        }}
+      />
+      <HomeStack.Screen 
+        name="UseEffect" 
+        component={UseEffectScreen}
+        options={{ 
+          title: 'UseEffect Demo',
+          headerBackTitle: 'Home'
+        }}
+      />
+      <HomeStack.Screen 
+        name="Login" 
+        component={LoginScreen}
+        options={{ 
+          title: 'Login',
+          headerBackTitle: 'Home'
+        }}
+      />
+      <HomeStack.Screen 
+        name="Flatlist" 
+        component={FlatlistScreen}
+        options={{ 
+          title: 'Flat List Demo',
+          headerBackTitle: 'Home'
+        }}
+      />
+    </HomeStack.Navigator>
   )
 }
 
@@ -46,13 +130,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
-  
   },
   scrollContent: {
     paddingVertical: 16,
   },
   buttonWrapper: {
     marginVertical: 8,
-    
   },
 })
