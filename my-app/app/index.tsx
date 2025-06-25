@@ -1,65 +1,69 @@
-
 import React from 'react';
-//import { createNativeStackNavigator } from '@react-navigation/native-stack';
-//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import HomeScreen from './Screens/HomeScreen';
+import HomeScreen from './Screens/HomeScreen'; 
 import ProfileScreen from './Screens/ProfileScreen';
 import DocumentScreen from './Screens/DocumentScreen';
-import CalculatorScreen from './Screens/CalculatorScreen';
-import TaskScreen from './Screens/TaskScreen';
-import UseEffectScreen from './Screens/useEffectScreen';
-import LoginScreen from './Screens/LoginScreen';
-import FlatlistScreen from './Screens/FlatlistScreen';
 
-export type RootStackParamList = {
-  navigate: any;
-  Home: undefined;
+
+export type RootDrawerParamList = {
+  HomeMain: undefined; 
   Profile: undefined;
   Document: undefined;
-  Calculator: undefined;
-  Task:undefined;
-  UseEffect:undefined;
-  Login: undefined;
-  Flatlist: undefined;
 };
 
+const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
-// const Stack = createNativeStackNavigator<RootStackParamList>();
-// const App = () => {
-//    return (
-//  <Stack.Navigator initialRouteName="Home">
-//   <Stack.Screen name="Home" component={HomeScreen} />
-//   <Stack.Screen name="Profile" component={ProfileScreen} />
-//   <Stack.Screen name="Document" component={DocumentScreen} />
-//   <Stack.Screen name="Calculator" component={CalculatorScreen}/>
-//   <Stack.Screen name="Task" component={TaskScreen}/>
-//   <Stack.Screen name="UseEffect" component={UseEffectScreen}/>
-//   <Stack.Screen name="Login" component={LoginScreen}/>
-//   <Stack.Screen name="Flatlist" component={FlatlistScreen}/>
-//  </Stack.Navigator>
-//  );
-// };
-
-
-
-
-const Drawer = createDrawerNavigator();
 const App = () => {
-   return (
- <Drawer.Navigator initialRouteName="Home">
-  <Drawer.Screen name="Home" component={HomeScreen} />
-  <Drawer.Screen name="Profile" component={ProfileScreen} />
-  <Drawer.Screen name="Document" component={DocumentScreen} />
-  <Drawer.Screen name="Calculator" component={CalculatorScreen}/>
-  <Drawer.Screen name="Task" component={TaskScreen}/>
-  <Drawer.Screen name="UseEffect" component={UseEffectScreen}/>
-  <Drawer.Screen name="Login" component={LoginScreen}/>
-  <Drawer.Screen name="Flatlist" component={FlatlistScreen}/>
- </Drawer.Navigator>
-
- 
- );
+  return (
+    <Drawer.Navigator 
+      initialRouteName="HomeMain"
+      screenOptions={{
+        headerShown: true,
+        drawerStyle: {
+          backgroundColor: '#f8f9fa',
+          width: 280,
+        },
+        drawerLabelStyle: {
+          fontSize: 18,
+          fontWeight: '600',
+          marginLeft: -16,
+        },
+        drawerItemStyle: {
+          marginVertical: 5,
+        },
+        drawerActiveTintColor: '#6200ea',
+        drawerInactiveTintColor: '#666',
+      }}
+    >
+  
+      <Drawer.Screen 
+        name="HomeMain" 
+        component={HomeScreen}
+        options={{
+          drawerLabel: '🏠 Home',
+          title: 'Home',
+        }}
+      />
+      
+     
+      <Drawer.Screen 
+        name="Profile" 
+        component={ProfileScreen}
+        options={{
+          drawerLabel: '👤 Profile',
+          title: 'Profile',
+        }}
+      />
+      <Drawer.Screen 
+        name="Document" 
+        component={DocumentScreen}
+        options={{
+          drawerLabel: '📄 Documents',
+          title: 'Documents',
+        }}
+      />
+    </Drawer.Navigator>
+  );
 };
 
 
