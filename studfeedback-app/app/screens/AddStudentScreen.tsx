@@ -1,56 +1,75 @@
+// app/screens/AddStudentScreen.tsx
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import {  TextInput,  Button,  ScrollView,  StyleSheet,  View,  Text,  TouchableOpacity,  Alert,} from 'react-native';
+import {  TextInput,  Button,  ScrollView, StyleSheet, View,  Text,  TouchableOpacity,  Alert,  ActivityIndicator,} from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useStudents } from '../../context/StudentContext'; 
-
+import { useStudents } from '../../context/StudentContext';
 
 export type RootStackParamList = {
   Home: undefined;
   AddStudent: undefined;
 };
 
-type AddStudentScreenNavigationProp = NativeStackNavigationProp<RootStackParamList,'AddStudent'>;
+type AddStudentScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'AddStudent'>;
 
 const AddStudentScreen: React.FC = () => {
   const navigation = useNavigation<AddStudentScreenNavigationProp>();
-  const { addStudent } = useStudents(); 
-
+  const { addStudent } = useStudents();
 
   const [name, setName] = useState('');
   const [course, setCourse] = useState('');
   const [roll, setRoll] = useState('');
   const [feedback, setFeedback] = useState('');
   const [rating, setRating] = useState('');
+  const [saving, setSaving] = useState(false); 
 
+  
+  const handleSubmit = async () => {
 
-  const handleSubmit = () => {
     if (!name.trim() || !course.trim() || !roll.trim()) {
       Alert.alert('Missing Info', 'Name, Course, and Roll Number are required.');
       return;
     }
 
-    const newStudent = {
-      id: Date.now().toString(),
-      name,
-      course,
-      roll,
-      feedback,
-      rating: parseFloat(rating) || 0,
-    };
+    try {
+      setSaving(true);
 
-    addStudent(newStudent);
-    Alert.alert('Success', 'Student details saved.');
+    
+      const newStudent = {
+        id: Date.now().toString(), 
+        name: name.trim(),
+        course: course.trim(),
+        roll: roll.trim(),
+        feedback: feedback.trim(),
+        rating: parseFloat(rating) || 0,
+      };
 
- 
+      console.log('Submitting new student:', newStudent);
 
-    setName('');
-    setCourse('');
-    setRoll('');
-    setFeedback('');
-    setRating('');
+    
+      await addStudent(newStudent);
 
-    navigation.navigate('Home'); 
+    
+      Alert.alert('Success', 'Student details saved permanently!', [
+        {
+          text: 'OK',
+          onPress: () => {
+            setName('');
+            setCourse('');
+            setRoll('');
+            setFeedback('');
+            setRating('');
+
+            navigation.navigate('Home');
+          },
+        },
+      ]);
+    } catch (error) {
+      console.error('Error saving student:', error);
+      Alert.alert('Error', 'Failed to save student details. Please try again.');
+    } finally {
+      setSaving(false); // Hide loading
+    }
   };
 
   return (
@@ -63,6 +82,7 @@ const AddStudentScreen: React.FC = () => {
         onChangeText={setName}
         placeholder="Enter full name"
         style={styles.input}
+        editable={!saving}
       />
 
       <Text style={styles.label}>Course *</Text>
@@ -71,6 +91,7 @@ const AddStudentScreen: React.FC = () => {
         onChangeText={setCourse}
         placeholder="Enter course"
         style={styles.input}
+        editable={!saving}
       />
 
       <Text style={styles.label}>Roll Number *</Text>
@@ -79,33 +100,52 @@ const AddStudentScreen: React.FC = () => {
         onChangeText={setRoll}
         placeholder="Enter roll number"
         style={styles.input}
+        editable={!saving}
       />
 
-      {/* <Text style={styles.label}>Feedback</Text>
+      <Text style={styles.label}>Feedback</Text>
       <TextInput
         value={feedback}
         onChangeText={setFeedback}
-        placeholder="Write feedback"
+        placeholder="Write feedback (optional)"
         multiline
         numberOfLines={3}
         style={[styles.input, { height: 80 }]}
+        editable={!saving}
       />
 
       <Text style={styles.label}>Rating (0–5)</Text>
       <TextInput
         value={rating}
         onChangeText={setRating}
-        placeholder="Enter rating"
+        placeholder="Enter rating (optional)"
         keyboardType="numeric"
         style={styles.input}
-      /> */}
+        editable={!saving}
+      />
 
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.submitText}>Save Student Details</Text>
+      <TouchableOpacity 
+        style={[styles.submitButton, saving && styles.disabledButton]} 
+        onPress={handleSubmit}
+        disabled={saving} 
+      >
+        {saving ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="small" color="#fff" />
+            <Text style={styles.submitText}>Saving...</Text>
+          </View>
+        ) : (
+          <Text style={styles.submitText}>Save Student Details</Text>
+        )}
       </TouchableOpacity>
 
       <View style={styles.cancelButton}>
-        <Button title="Cancel" color="#888" onPress={() => navigation.goBack()} />
+        <Button 
+          title="Cancel" 
+          color="#888" 
+          onPress={() => navigation.goBack()}
+          disabled={saving} 
+        />
       </View>
     </ScrollView>
   );
@@ -145,10 +185,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
+  disabledButton: {
+    backgroundColor: '#cccccc',
+  },
   submitText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  loadingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
   cancelButton: {
     marginTop: 15,

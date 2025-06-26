@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { Alert, TextInput, Button, ScrollView, StyleSheet,View, Text, TouchableOpacity } from 'react-native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { Alert, TextInput, Button, ScrollView, StyleSheet,View, Text, TouchableOpacity } from 'react-native'
 import { useContacts } from '../../context/ContactContext'
 
 export type RootStackParamList = {
