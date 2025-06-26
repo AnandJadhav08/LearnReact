@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native'
+import { useRouter } from 'expo-router';
 import {View,Text,TextInput,TouchableOpacity,StyleSheet,SafeAreaView,StatusBar,Alert,} from 'react-native';
-import RootStackParamList from '@/types/RootStackParamList';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
-
-
-type SignInScreenNavProp = NativeStackNavigationProp<RootStackParamList, 'SignIn'>
 
 const SignInScreen: React.FC= () => {
 
-  const navigation = useNavigation<SignInScreenNavProp>()
+    const router = useRouter();
+
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -22,14 +18,16 @@ const SignInScreen: React.FC= () => {
     }
 
     Alert.alert('Login', `Attempting to login with email: ${email}`);
+    router.push('/(tabs)/HomeScreen');
   };
 
   const handleForgotPassword = (): void => {
     Alert.alert('Forgot Password', 'Password reset functionality would go here');
+    router.push('/(tabs)/ForgetpwScreen');
   };
 
   const handleCreateAccount = (): void => {
-    navigation.navigate('SignUp');
+    router.push('/(tabs)/SignUpScreen');
   };
 
   const handleTermsOfUse = (): void => {
@@ -131,7 +129,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#F5C842',
-    paddingVertical: 15,
+    paddingVertical: 40,
     alignItems: 'center',
   },
   imdbLogo: {
@@ -248,3 +246,156 @@ const styles = StyleSheet.create({
 });
 
 export default SignInScreen;
+
+
+// import React from 'react';
+// import { useRouter } from 'expo-router';
+// import {View,Text,StyleSheet,SafeAreaView,StatusBar} from 'react-native';
+
+// const HomeScreen: React.FC= () => {
+
+//     const router = useRouter();
+
+
+ 
+
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <StatusBar barStyle="dark-content" backgroundColor="#F5C842" />
+      
+     
+//       <View style={styles.header}>
+//         <Text style={styles.imdbLogo}>IMDb</Text>
+//       </View>
+
+//       <View style={styles.content}>
+//              <Text style={styles.title}>Home</Text>
+//       </View>
+//     </SafeAreaView>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#FFFFFF',
+//   },
+//   header: {
+//     backgroundColor: '#F5C842',
+//     paddingVertical: 40,
+//     alignItems: 'center',
+//   },
+//   imdbLogo: {
+//     fontSize: 24,
+//     fontWeight: 'bold',
+//     color: '#000000',
+//   },
+//   content: {
+//     flex: 1,
+//     paddingHorizontal: 20,
+//     paddingTop: 30,
+//   },
+//   title: {
+//     fontSize: 28,
+//     fontWeight: '600',
+//     color: '#000000',
+//     marginBottom: 30,
+//     textAlign: 'center',
+//   },
+//   input: {
+//     borderWidth: 1,
+//     borderColor: '#CCCCCC',
+//     borderRadius: 8,
+//     paddingHorizontal: 15,
+//     paddingVertical: 12,
+//     fontSize: 16,
+//     marginBottom: 15,
+//     backgroundColor: '#FFFFFF',
+//   },
+//   optionsRow: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     marginBottom: 25,
+//   },
+//   rememberMeContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   checkbox: {
+//     width: 20,
+//     height: 20,
+//     borderWidth: 2,
+//     borderColor: '#CCCCCC',
+//     marginRight: 8,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   checkboxChecked: {
+//     backgroundColor: '#F5C842',
+//     borderColor: '#F5C842',
+//   },
+//   checkmark: {
+//     color: '#000000',
+//     fontSize: 12,
+//     fontWeight: 'bold',
+//   },
+//   rememberMeText: {
+//     fontSize: 16,
+//     color: '#000000',
+//   },
+//   forgotPasswordText: {
+//     fontSize: 16,
+//     color: '#0066CC',
+//   },
+//   loginButton: {
+//     backgroundColor: '#F5C842',
+//     paddingVertical: 12,
+//     borderRadius: 8,
+//     alignItems: 'center',
+//     marginBottom: 30,
+//   },
+//   loginButtonText: {
+//     fontSize: 18,
+//     fontWeight: '600',
+//     color: '#000000',
+//   },
+//   dividerContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     marginBottom: 20,
+//   },
+//   dividerLine: {
+//     flex: 1,
+//     height: 1,
+//     backgroundColor: '#CCCCCC',
+//   },
+//   dividerText: {
+//     marginHorizontal: 15,
+//     fontSize: 16,
+//     color: '#666666',
+//   },
+//   createAccountButton: {
+//     backgroundColor: '#000000',
+//     paddingVertical: 12,
+//     borderRadius: 8,
+//     alignItems: 'center',
+//   },
+//   createAccountButtonText: {
+//     fontSize: 18,
+//     fontWeight: '600',
+//     color: '#FFFFFF',
+//   },
+//   footer: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-around',
+//     paddingVertical: 200,
+//     paddingHorizontal: 10,
+//   },
+//   footerText: {
+//     fontSize: 14,
+//     color: '#666666',
+//   },
+// });
+
+// export default HomeScreen;

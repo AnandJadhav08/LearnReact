@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import {View,Text,TextInput,TouchableOpacity,StyleSheet,SafeAreaView,StatusBar,Alert,KeyboardAvoidingView,Platform,ScrollView,} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import RootStackParamList from '@/types/RootStackParamList';
+import { useRouter } from 'expo-router';
+
 
 type FormData =  {
   username: string;
@@ -13,10 +12,12 @@ type FormData =  {
   rememberMe: boolean;
 } ;
  
-type SignUpScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'SignUp'>;
+
 
 const SignUpScreen: React.FC = () => {
-  const navigation = useNavigation<SignUpScreenNavigationProp>();
+
+    const router = useRouter();
+ 
   const [formData, setFormData] = useState<FormData>({
     username: '',
     email: '',
@@ -58,8 +59,8 @@ const SignUpScreen: React.FC = () => {
   const handleCreateAccount = () => {
     if (validateForm()) {
       Alert.alert('Success', 'Account created successfully!');
-      navigation.navigate('SignIn');
     }
+    router.push('/(tabs)/VerifyScreen');
   };
 
   const handleGoogleSignUp = () => {
@@ -71,7 +72,7 @@ const SignUpScreen: React.FC = () => {
   };
 
   const handleLogin = () => {
-    navigation.navigate('SignIn');
+  router.push('/(tabs)/SignInScreen');
   };
 
   const handleTermsOfUse = () => {
@@ -86,7 +87,7 @@ const SignUpScreen: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#F5C518" />
       
-      {/* Header */}
+
       <View style={styles.header}>
         <Text style={styles.headerTitle}>IMDb</Text>
       </View>
@@ -102,7 +103,7 @@ const SignUpScreen: React.FC = () => {
           <View style={styles.content}>
             <Text style={styles.title}>Sign up</Text>
 
-            {/* Username Input */}
+      
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.input}
@@ -115,7 +116,7 @@ const SignUpScreen: React.FC = () => {
               />
             </View>
 
-            {/* Email Input */}
+      
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.input}
@@ -129,7 +130,7 @@ const SignUpScreen: React.FC = () => {
               />
             </View>
 
-            {/* Password Input */}
+      
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.input}
@@ -152,7 +153,7 @@ const SignUpScreen: React.FC = () => {
               </TouchableOpacity>
             </View>
 
-            {/* Confirm Password Input */}
+      
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.input}
@@ -175,7 +176,7 @@ const SignUpScreen: React.FC = () => {
               </TouchableOpacity>
             </View>
 
-            {/* Remember Me Checkbox */}
+          
             <TouchableOpacity
               style={styles.checkboxContainer}
               onPress={() => handleInputChange('rememberMe', !formData.rememberMe)}
@@ -188,7 +189,7 @@ const SignUpScreen: React.FC = () => {
               <Text style={styles.checkboxLabel}>Remember Me</Text>
             </TouchableOpacity>
 
-            {/* Create Account Button */}
+         
             <TouchableOpacity
               style={styles.createAccountButton}
               onPress={handleCreateAccount}
@@ -196,7 +197,7 @@ const SignUpScreen: React.FC = () => {
               <Text style={styles.createAccountButtonText}>Create Account</Text>
             </TouchableOpacity>
 
-            {/* Social Login Buttons */}
+        
             <View style={styles.socialButtonsContainer}>
               <TouchableOpacity
                 style={styles.socialButton}
@@ -213,14 +214,14 @@ const SignUpScreen: React.FC = () => {
               </TouchableOpacity>
             </View>
 
-            {/* Already have account section */}
+      
             <View style={styles.loginSection}>
               <View style={styles.divider} />
               <Text style={styles.alreadyHaveAccount}>Already have an Account?</Text>
               <View style={styles.divider} />
             </View>
 
-            {/* Login Button */}
+         
             <TouchableOpacity
               style={styles.loginButton}
               onPress={handleLogin}
@@ -228,7 +229,7 @@ const SignUpScreen: React.FC = () => {
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
 
-            {/* Footer Links */}
+      
             <View style={styles.footerLinks}>
               <TouchableOpacity onPress={handleTermsOfUse}>
                 <Text style={styles.footerLinkText}>Conditions of Use</Text>
@@ -251,7 +252,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#F5C518',
-    paddingVertical: 15,
+    paddingVertical: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },
