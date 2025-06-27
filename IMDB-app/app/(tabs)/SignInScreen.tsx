@@ -18,7 +18,7 @@ const SignInScreen: React.FC= () => {
     }
 
     Alert.alert('Login', `Attempting to login with email: ${email}`);
-    router.push('/(tabs)/HomeScreen');
+    router.push('/HomeScreen');
   };
 
   const handleForgotPassword = (): void => {
