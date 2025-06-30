@@ -1,17 +1,32 @@
-import React, { JSX } from 'react';
-import {View,Text,SafeAreaView,StyleSheet,ScrollView,Image,TouchableOpacity, FlatList,} from 'react-native';
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useRouter } from 'expo-router';
-import MovieCard from '@/components/MovieCard';
+import React, { JSX }  from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar, SafeAreaView, FlatList, ScrollView  } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../App';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
+interface MovieProps {
+  title: string;
+  image: string;
+} 
 
-export default function HomeScreen(): JSX.Element {
+const MovieCard: React.FC<MovieProps> = ({ title, image }) => (
+  <TouchableOpacity style={styles.movieCard}>
+    <Image source={{ uri: image }} style={styles.movieImage} />
+    <Text style={styles.movieTitle}>{title}</Text>
+  </TouchableOpacity>
+);
 
-  const router = useRouter();
+type HomeNavProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
+
+export default function Home(): JSX.Element {
+
+   const navigation = useNavigation<HomeNavProp>();
+
   const topMovies = [
-    { title: 'Minecraft', 
-      image: 'https://i.ebayimg.com/images/g/wdIAAOSwcRxn7RxD/s-l1200.jpg'
+    { title: 'Hawkeye', 
+      image: 'https://cdn.marvel.com/content/1x/hawkeye_lob_crd_04.jpg'
      },
     { title: 'Thor: Love and Thunder', 
       image: 'https://m.media-amazon.com/images/M/MV5BZjRiMDhiZjQtNjk5Yi00ZDcwLTkyYTEtMDc1NjdmNjFhNGIzXkEyXkFqcGc@._V1_.jpg' 
@@ -19,48 +34,51 @@ export default function HomeScreen(): JSX.Element {
     { title: 'The Lord of the Rings', 
       image: 'https://tolkiengateway.net/w/images/thumb/5/5e/The_Lord_of_the_Rings_-_The_Return_of_the_King_-_Ensemble_poster.jpg/640px-The_Lord_of_the_Rings_-_The_Return_of_the_King_-_Ensemble_poster.jpg' 
     },
-     { title: 'Avengers', 
-      image: 'https://images1.wionews.com/images/ZB-EN/900x1600/2023/5/5/1683302779303_AvengersAgeofUltron.jpg' 
+     { title: 'The Suicide Squad', 
+      image: 'https://bluraysforeveryone.com/cdn/shop/files/TheSuicideSquad4KFullSlipSteelBook_HongKong_-Front_2.png?v=1713313061&width=1445' 
     },
   ];
 
   const upcomingMovies = [
-    { title: 'Avatar', 
-      image: 'https://m.media-amazon.com/images/M/MV5BNmQxNjZlZTctMWJiMC00NGMxLWJjNTctNTFiNjA1Njk3ZDQ5XkEyXkFqcGc@._V1_.jpg' 
-    },
-    { title: 'The Croods', 
-      image: 'https://wallpaper.dog/large/10825231.jpg' 
-    },
     { title: 'Chhaava', 
       image: 'https://stat4.bollywoodhungama.in/wp-content/uploads/2023/10/Chhaava.jpg' 
     },
-    { title: 'Elemental', 
-      image: 'https://i0.wp.com/pixarpost.com/wp-content/uploads/2023/06/Elemental-Real-3D-Payoff-Poster.jpg?resize=1200%2C1778&ssl=1' 
+    { title: 'Avatar', 
+      image: 'https://mlpnk72yciwc.i.optimole.com/cqhiHLc.IIZS~2ef73/w:auto/h:auto/q:75/https://bleedingcool.com/wp-content/uploads/2022/08/AVATAR_RERLS_1SHT_DIGITAL_sRGB_V7.jpg' 
     },
+    { title: 'Final Destination', 
+      image: 'https://www.joblo.com/wp-content/uploads/2025/04/final-destination-bloodlines-new-poster-691x1024.jpg' 
+    },
+    { title: 'The Dark Knight Rises', 
+      image: 'https://cdn.theplaylist.net/wp-content/uploads/2012/05/15053029/the-dark-knight-rises-final-poster.jpg' 
+    },
+   
   ];
 
   const recommendedMovies = [
-    { title: 'Elemental', 
-      image: 'https://i0.wp.com/pixarpost.com/wp-content/uploads/2023/06/Elemental-Real-3D-Payoff-Poster.jpg?resize=1200%2C1778&ssl=1' 
+    { title: 'Madame Web', 
+      image: 'https://i0.wp.com/www.seenit.co.uk/wp-content/uploads/Madame-Web-Poster.jpg?resize=800%2C1000&ssl=1' 
     },
-    { title: 'Jumanji', 
-      image: 'https://qqcdnpictest.mxplay.com/pic/bce7ae02445dad432bdab581e180ceef/en/2x3/312x468/d5f863cd13cc307123989701f8b72fdf_1280x1920.webp' 
+    { title: 'Quantemina', 
+      image: 'https://thathashtagshow.com/wp-content/uploads/2023/01/ant-man-and-the-wasp-quantumania-poster-819x1024.jpg' 
     },
-    { title: 'Minecraft', 
-      image: 'https://i.ebayimg.com/images/g/wdIAAOSwcRxn7RxD/s-l1200.jpg'
-     },
-    { title: 'The Croods', 
-     image: 'https://wallpaper.dog/large/10825231.jpg' 
-   },
+     { title: 'The Suicide Squad', 
+      image: 'https://bluraysforeveryone.com/cdn/shop/files/TheSuicideSquad4KFullSlipSteelBook_HongKong_-Front_2.png?v=1713313061&width=1445' 
+    },
+    { title: 'Inception', 
+      image: 'https://c8.alamy.com/comp/2JH2PW0/movie-poster-inception-2010-2JH2PW0.jpg' 
+    },
   ];
+
 
   return (
     <View style={styles.outerContainer}>
+      <StatusBar barStyle="dark-content" backgroundColor="#F5C842" />
       <SafeAreaView style={styles.safeArea}>
   
         <View style={styles.header}>
           <Text style={styles.imdbLogo}>IMDb</Text>
-          <TouchableOpacity onPress={() => router.push('/(tabs)/Notification')}>
+        <TouchableOpacity>
           <MaterialCommunityIcons name="bell" size={24} color="black" />
         </TouchableOpacity>
         </View>
@@ -74,16 +92,16 @@ export default function HomeScreen(): JSX.Element {
               style={styles.featuredImage}
             />
             <View style={styles.featuredOverlay}>
-              <Text style={styles.featuredTitle}>House of the Dragon</Text>
+              <Text style={styles.featuredTitle}>HOUSE OF THE DRAGON</Text>
+              <Text style={styles.featuredSubtitle}>House of the Dragon</Text>
               <Text style={styles.featuredDescription}>
                 An internal succession war within House Targaryen at the height of its power, 172 years before the birth of Daenerys Targaryen.
               </Text>
-              <TouchableOpacity style={styles.seeMoreButton} onPress={() => router.push('/(tabs)/MovieDetail')}>
+              <TouchableOpacity style={styles.seeMoreButton}>
                 <Text style={styles.seeMoreText}>See More</Text>
               </TouchableOpacity>
             </View>
           </View>
-
 
           <View style={styles.section}>
             <View style={styles.dailyPick}>
@@ -176,20 +194,19 @@ export default function HomeScreen(): JSX.Element {
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    backgroundColor: '#ffa600', 
+    backgroundColor: '#FFFFFF', 
   },
   safeArea: {
     flex: 1,
-    backgroundColor: '#F5C842', 
+    backgroundColor: '#FFFFFF', 
   },
   header: {
     backgroundColor: '#F5C842',
-    paddingVertical: 30,
-    marginTop: 28,
-    paddingHorizontal: 15,
+    paddingVertical: 35,
+    paddingHorizontal: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
-   
+    alignItems: 'center',
   },
   imdbLogo: {
     fontSize: 24,
@@ -222,29 +239,38 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   featuredTitle: {
-    color: '#F5C842',
-    fontSize: 14,
+    color: '#FFFFFF',
+    fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 4,
     zIndex: 2,
   },
-  featuredDescription: {
+  featuredSubtitle: {
     color: '#FFFFFF',
     fontSize: 14,
+    marginBottom: 8,
+    fontWeight: 'bold',
+    zIndex: 2,
+  },
+  featuredDescription: {
+    color: '#FFFFFF',
+    fontSize: 12,
     lineHeight: 16,
     marginBottom: 12,
+    fontWeight: 'bold',
     zIndex: 2,
   },
   seeMoreButton: {
     backgroundColor: '#F5C842',
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 4,
     alignSelf: 'flex-start',
   },
   seeMoreText: {
     color: '#000000',
-    fontSize: 14,
+    fontWeight: 'bold',
+    fontSize: 12,
   },
   section: {
     backgroundColor: '#FFFFFF',
@@ -325,5 +351,21 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     backgroundColor: '#FFFFFF',
   },
- 
+  movieCard: {
+    marginRight: 12,
+    width: 120,
+    backgroundColor: '#FFFFFF',
+  },
+  movieImage: {
+    width: 120,
+    height: 160,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  movieTitle: {
+    fontSize: 12,
+    color: '#000000',
+    textAlign: 'center',
+    lineHeight: 16,
+  },
 });

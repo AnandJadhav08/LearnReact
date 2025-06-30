@@ -1,77 +1,101 @@
-// App.tsx
-import React, { useState } from 'react';
-//import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
-import AddStudentScreen from './screens/AddStudentScreen';
-import StudentDetailsScreen from './screens/StudentDetailsScreen';
-import { Student, Role } from '@/types';
+import React from 'react';
+//import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { NavigationContainer } from '@react-navigation/native';
+import Home from './(tabs)/Home';
+import { TouchableOpacity } from 'react-native';
+import { router } from 'expo-router';
 
 export type RootStackParamList = {
-  Login: undefined;
   Home: undefined;
-  AddStudent: undefined;
-  StudentDetails: { student: Student };
+  Discover: undefined;
 };
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
-
-export default function App() {
-  const [role, setRole] = useState<Role | null>(null);
-  const [students, setStudents] = useState<Student[]>([]);
-
-  const addStudent = (student: Student) => {
-    setStudents(prev => [...prev, student]);
-  };
-
-  const updateStudent = (updated: Student) => {
-    setStudents(prev =>
-      prev.map(s => (s.id === updated.id ? updated : s))
-    );
-  };
+const Tab = createBottomTabNavigator<RootStackParamList>();
+ const App = () => {
 
   return (
-  
-      <Stack.Navigator>
-        <Stack.Screen name="Login">
-         {props => (
-            <LoginScreen
-              {...props}
-              setRole={setRole}
-            />
-          )}
-        </Stack.Screen>
+   <NavigationContainer>
+      <Tab.Navigator initialRouteName='Home'
+    screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: '#000000',
+          borderTopWidth: 0,
+          height: 80,
+          paddingBottom: 10,
+          paddingTop: 10,
+        },
+        tabBarActiveTintColor: '#F5C518', 
+        tabBarInactiveTintColor: '#FFFFFF', 
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '500',
+          marginTop: 5,
+        },
+      }}>
 
-        <Stack.Screen name="Home">
-          {props => (
-            <HomeScreen
-              {...props}
-              role={role}
-              students={students}
-              setStudents={setStudents}
+      <Tab.Screen name="Home" 
+      component={Home} 
+      options={{ headerShown: false,
+        tabBarIcon: ({ focused, color, size }) => (
+          <TouchableOpacity onPress={() => router.push('/(tabs)/Home')}>
+            <MaterialCommunityIcons 
+              name={focused ? "home" : "home-outline"} 
+              size={size || 26} 
+              color={color} 
             />
-          )}
-        </Stack.Screen>
+            </TouchableOpacity>
+          ),
+       }} />
 
-        <Stack.Screen name="AddStudent">
-          {props => (
-            <AddStudentScreen
-              {...props}
-              addStudent={addStudent}
+      {/* <Tab.Screen name="BrowserScreen"   
+      component={BrowserScreen}   
+      options={{ headerShown: false,
+      tabBarIcon: ({ focused, color, size }) => (
+          <TouchableOpacity onPress={() => router.push('/(tabs)/BrowserScreen')}>
+            <MaterialCommunityIcons
+              name={focused ? "magnify-plus" : "magnify"}
+              size={size || 26}
+              color={color}
             />
-          )}
-        </Stack.Screen>
+            </TouchableOpacity>
+          ),
+       }} />
+      
+       <Tab.Screen name="DiscoverScreen"   
+      component={DiscoverScreen}   
+      options={{ headerShown: false,
+        tabBarIcon: ({ focused, color, size }) => (
+          <TouchableOpacity onPress={() => router.push('/(tabs)/DiscoverScreen')}>
+            <MaterialCommunityIcons
+              name={focused ? "compass" : "compass-outline"}
+              size={size || 26}
+              color={color}
+            />
+            </TouchableOpacity>
+          )
 
-        <Stack.Screen name="StudentDetails">
-          {props => (
-            <StudentDetailsScreen
-              {...props}
-              updateStudent={updateStudent}
+       }} />
+
+       <Tab.Screen name="ProfileScreen"   
+      component={ProfileScreen}   
+      options={{ headerShown: false,
+        tabBarIcon: ({ focused, color, size }) => (
+          <TouchableOpacity onPress={() => router.push('/(tabs)/ProfileScreen')}>
+            <MaterialCommunityIcons
+              name={focused ? "account" : "account-outline"}
+              size={size || 26}
+              color={color}
             />
-          )}
-        </Stack.Screen>
-      </Stack.Navigator>
-  
+            </TouchableOpacity>
+          )
+       }} /> */}
+    </Tab.Navigator>
+   </NavigationContainer> 
   );
+
 }
+
+export default App;
