@@ -112,17 +112,17 @@ const RatingPage: React.FC = () => {
           <SafeAreaView style={styles.safeArea}>
       
             <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.push('/(tabs)/MovieDetail')}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.replace('/(tabs)/MovieDetail')}>
           <MaterialCommunityIcons name="chevron-left" size={34} color="#000" />
         </TouchableOpacity>
         <Text style={styles.imdbLogo}>Rating & Review</Text>
       </View>
 
       <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-        {/* Rating Section */}
+       
         <View style={styles.ratingSection}>
           <View style={styles.mainRatingContainer}>
-            {/* Left side - Rating info */}
+           
             <View style={styles.leftRatingInfo}>
               <Text style={styles.ratingLabel}>Rating</Text>
               <View style={styles.ratingWithStar}>
@@ -133,7 +133,7 @@ const RatingPage: React.FC = () => {
               </View>
             </View>
             
-            {/* Right side - Rating Bars */}
+          
             <View style={styles.rightRatingBars}>
               {renderRatingBar(5, 45)}
               {renderRatingBar(4, 25)}
@@ -143,7 +143,7 @@ const RatingPage: React.FC = () => {
             </View>
           </View>
 
-          {/* User Rating Section */}
+      
           <View style={styles.userRatingSection}>
             <Text style={styles.tapToRateText}>Tap to rate:</Text>
             <Text style={styles.userStarsContainer}>
@@ -151,14 +151,14 @@ const RatingPage: React.FC = () => {
             </Text>
           </View>
 
-          {/* Write Review */}
+        
           <TouchableOpacity style={styles.writeReviewButton}>
             <Text style={styles.writeReviewText}>Write a review</Text>
             <MaterialCommunityIcons name="pencil" size={16} color="#000" />
           </TouchableOpacity>
         </View>
 
-        {/* Reviews List */}
+   
         <View style={styles.reviewsContainer}>
           {reviews.map(renderReview)}
         </View>
@@ -215,15 +215,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#000',
-    marginBottom: 8,
+    marginBottom: 17,
   },
   ratingWithStar: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 17, 
   },
   ratingValue: {
     fontSize: 14,
-    color: '#666',
+    color: '#000',
     marginLeft: 4,
   },
   rightRatingBars: {
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
   ratingBarContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 0,
   },
   starsContainer: {
     flexDirection: 'row',
@@ -240,7 +241,7 @@ const styles = StyleSheet.create({
   },
   progressBarContainer: {
     flex: 1,
-    marginLeft: 12,
+    marginLeft: 28,
   },
   progressBarBackground: {
     height: 6,
@@ -256,16 +257,17 @@ const styles = StyleSheet.create({
   userRatingSection: {
     marginBottom: 20,
     justifyContent:'space-between',
+    flexDirection:'row'
   },
   tapToRateText: {
     fontSize: 15,
-    color: '#000000',
-    marginBottom: 8,
+    color: 'bold',
     fontWeight: '500',
   },
   userStarsContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+    marginLeft: 12,
   },
   writeReviewButton: {
     flexDirection: 'row',

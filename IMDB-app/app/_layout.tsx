@@ -12,7 +12,6 @@ export default function TabsLayout() {
       <Stack.Screen name="ForgetpwScreen" />
       <Stack.Screen name="ResetpwScreen" />
       <Stack.Screen name="VerifyScreen" />
-      <Stack.Screen name="HomeScreen" />
     </Stack>
   );
 }

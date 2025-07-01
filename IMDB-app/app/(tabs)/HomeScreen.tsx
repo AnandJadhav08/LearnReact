@@ -1,88 +1,58 @@
 import React, { JSX } from 'react';
-import {View,Text,SafeAreaView,StyleSheet,ScrollView,Image,TouchableOpacity, FlatList,} from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, ScrollView, Image, TouchableOpacity, FlatList, Dimensions} from 'react-native';
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Carousel from 'react-native-reanimated-carousel';
 import { useRouter } from 'expo-router';
 import MovieCard from '@/components/MovieCard';
-
+import {featuredMovies, topMovies, upcomingMovies, recommendedMovies} from '@/utils/MovieData';
 
 
 export default function HomeScreen(): JSX.Element {
 
   const router = useRouter();
-  const topMovies = [
-    { title: 'Minecraft', 
-      image: 'https://i.ebayimg.com/images/g/wdIAAOSwcRxn7RxD/s-l1200.jpg'
-     },
-    { title: 'Thor: Love and Thunder', 
-      image: 'https://m.media-amazon.com/images/M/MV5BZjRiMDhiZjQtNjk5Yi00ZDcwLTkyYTEtMDc1NjdmNjFhNGIzXkEyXkFqcGc@._V1_.jpg' 
-    },
-    { title: 'The Lord of the Rings', 
-      image: 'https://tolkiengateway.net/w/images/thumb/5/5e/The_Lord_of_the_Rings_-_The_Return_of_the_King_-_Ensemble_poster.jpg/640px-The_Lord_of_the_Rings_-_The_Return_of_the_King_-_Ensemble_poster.jpg' 
-    },
-     { title: 'Avengers', 
-      image: 'https://images1.wionews.com/images/ZB-EN/900x1600/2023/5/5/1683302779303_AvengersAgeofUltron.jpg' 
-    },
-  ];
 
-  const upcomingMovies = [
-    { title: 'Avatar', 
-      image: 'https://m.media-amazon.com/images/M/MV5BNmQxNjZlZTctMWJiMC00NGMxLWJjNTctNTFiNjA1Njk3ZDQ5XkEyXkFqcGc@._V1_.jpg' 
-    },
-    { title: 'The Croods', 
-      image: 'https://wallpaper.dog/large/10825231.jpg' 
-    },
-    { title: 'Chhaava', 
-      image: 'https://stat4.bollywoodhungama.in/wp-content/uploads/2023/10/Chhaava.jpg' 
-    },
-    { title: 'Elemental', 
-      image: 'https://i0.wp.com/pixarpost.com/wp-content/uploads/2023/06/Elemental-Real-3D-Payoff-Poster.jpg?resize=1200%2C1778&ssl=1' 
-    },
-  ];
-
-  const recommendedMovies = [
-    { title: 'Elemental', 
-      image: 'https://i0.wp.com/pixarpost.com/wp-content/uploads/2023/06/Elemental-Real-3D-Payoff-Poster.jpg?resize=1200%2C1778&ssl=1' 
-    },
-    { title: 'Jumanji', 
-      image: 'https://qqcdnpictest.mxplay.com/pic/bce7ae02445dad432bdab581e180ceef/en/2x3/312x468/d5f863cd13cc307123989701f8b72fdf_1280x1920.webp' 
-    },
-    { title: 'Minecraft', 
-      image: 'https://i.ebayimg.com/images/g/wdIAAOSwcRxn7RxD/s-l1200.jpg'
-     },
-    { title: 'The Croods', 
-     image: 'https://wallpaper.dog/large/10825231.jpg' 
-   },
-  ];
 
   return (
     <View style={styles.outerContainer}>
       <SafeAreaView style={styles.safeArea}>
-  
+
         <View style={styles.header}>
           <Text style={styles.imdbLogo}>IMDb</Text>
           <TouchableOpacity onPress={() => router.push('/(tabs)/Notification')}>
-          <MaterialCommunityIcons name="bell" size={24} color="black" />
-        </TouchableOpacity>
+            <MaterialCommunityIcons name="bell" size={24} color="black" />
+          </TouchableOpacity>
         </View>
 
 
         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
 
-          <View style={styles.featuredSection}>
-            <Image
-              source={{ uri: 'https://m.media-amazon.com/images/S/pv-target-images/cd1315256292e7814afe0b8a5e25e6d2c752aea049deb5df61b6d3ebbbff777d.jpg' }}
-              style={styles.featuredImage}
+          <View style={styles.carouselContainer}>
+            <Carousel
+              loop
+              autoPlay
+              autoPlayInterval={4000}
+              width={Dimensions.get('window').width}
+              height={300}
+              data={featuredMovies}
+              scrollAnimationDuration={1000}
+              renderItem={({ item }) => (
+                <View style={styles.featuredSection}>
+                  <Image source={{ uri: item.image }} style={styles.featuredImage} />
+                  <View style={styles.featuredOverlay}>
+                    <Text style={styles.featuredTitle}>{item.title}</Text>
+                    <Text style={styles.featuredDescription}>{item.description}</Text>
+                    <TouchableOpacity
+                      style={styles.seeMoreButton}
+                      onPress={() => router.push('/(tabs)/MovieDetail')}
+                    >
+                      <Text style={styles.seeMoreText}>See More</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )}
             />
-            <View style={styles.featuredOverlay}>
-              <Text style={styles.featuredTitle}>House of the Dragon</Text>
-              <Text style={styles.featuredDescription}>
-                An internal succession war within House Targaryen at the height of its power, 172 years before the birth of Daenerys Targaryen.
-              </Text>
-              <TouchableOpacity style={styles.seeMoreButton} onPress={() => router.push('/(tabs)/MovieDetail')}>
-                <Text style={styles.seeMoreText}>See More</Text>
-              </TouchableOpacity>
-            </View>
           </View>
+
 
 
           <View style={styles.section}>
@@ -115,16 +85,16 @@ export default function HomeScreen(): JSX.Element {
               </TouchableOpacity>
             </View>
             <View style={styles.moviesScroll}>
-             <FlatList
-               data={topMovies}
-               keyExtractor={(item, index) => index.toString()}
-               horizontal
-              showsHorizontalScrollIndicator={false}
-               renderItem={({ item }) => (
-                 <MovieCard title={item.title} image={item.image} />
-               )}
-             />
-    </View>
+              <FlatList
+                data={topMovies}
+                keyExtractor={(item, index) => index.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <MovieCard title={item.title} image={item.image} />
+                )}
+              />
+            </View>
           </View>
 
           <View style={styles.section}>
@@ -134,17 +104,17 @@ export default function HomeScreen(): JSX.Element {
                 <Text style={styles.seeMoreLink}>See More</Text>
               </TouchableOpacity>
             </View>
-           <View style={styles.moviesScroll}>
-            <FlatList
-              data={upcomingMovies}
-              keyExtractor={(item, index) => index.toString()}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <MovieCard title={item.title} image={item.image} />
-              )}
-            />
-    </View>
+            <View style={styles.moviesScroll}>
+              <FlatList
+                data={upcomingMovies}
+                keyExtractor={(item, index) => index.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <MovieCard title={item.title} image={item.image} />
+                )}
+              />
+            </View>
           </View>
 
 
@@ -156,16 +126,16 @@ export default function HomeScreen(): JSX.Element {
               </TouchableOpacity>
             </View>
             <View style={styles.moviesScroll}>
-             <FlatList
-               data={recommendedMovies}
-               keyExtractor={(item, index) => index.toString()}
-               horizontal
-               showsHorizontalScrollIndicator={false}
-               renderItem={({ item }) => (
-                 <MovieCard title={item.title} image={item.image} />
-               )}
-             />
-    </View>
+              <FlatList
+                data={recommendedMovies}
+                keyExtractor={(item, index) => index.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <MovieCard title={item.title} image={item.image} />
+                )}
+              />
+            </View>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -176,11 +146,11 @@ export default function HomeScreen(): JSX.Element {
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    backgroundColor: '#ffa600', 
+    backgroundColor: '#ffa600',
   },
   safeArea: {
     flex: 1,
-    backgroundColor: '#F5C842', 
+    backgroundColor: '#F5C842',
   },
   header: {
     backgroundColor: '#F5C842',
@@ -189,7 +159,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
-   
+
   },
   imdbLogo: {
     fontSize: 24,
@@ -201,8 +171,12 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
   },
+  carouselContainer: {
+  height: 300,
+  backgroundColor: '#FFFFFF',
+},
   featuredSection: {
     position: 'relative',
     height: 300,
@@ -218,7 +192,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    backgroundColor: 'rgba(0, 0, 0, 0.42)',
     padding: 16,
   },
   featuredTitle: {
@@ -325,5 +299,5 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     backgroundColor: '#FFFFFF',
   },
- 
+
 });

@@ -61,13 +61,13 @@ export default function Watchlist() {
           <SafeAreaView style={styles.safeArea}>
       
             <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.push('/(tabs)/MovieDetail')}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.replace('/(tabs)/MovieDetail')}>
           <MaterialCommunityIcons name="chevron-left" size={34} color="#000" />
         </TouchableOpacity>
         <Text style={styles.imdbLogo}>Watchlist</Text>
       </View>
 
-      <TouchableOpacity style={styles.createButton} onPress={() => router.push('/(tabs)/CollectionPage')}>
+      <TouchableOpacity style={styles.createButton} onPress={() => router.replace('/(tabs)/Collection')}>
         <Text style={styles.createButtonText}>+  Create a collection</Text>
       </TouchableOpacity>
 

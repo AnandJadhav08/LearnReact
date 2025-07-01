@@ -101,23 +101,23 @@ const MovieDetail: React.FC = () => {
         </View>
 
         <View style={styles.contentContainer}>
-          {/* Tab Navigation */}
+     
           <View style={styles.tabContainer}>
-            <TouchableOpacity style={styles.tabButton} onPress={() => router.push('/(tabs)/RatingPage')}>
+            <TouchableOpacity style={styles.tabButton} onPress={() => router.replace('/(tabs)/RatingPage')}>
               <Text style={styles.tabText}>Rating</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.tabButton} onPress={() => router.push('/(tabs)/GuidePage')}>
+            <TouchableOpacity style={styles.tabButton} onPress={() => router.replace('/(tabs)/GuidePage')}>
               <Text style={styles.tabText}>Guide</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.tabButton}>
               <Text style={styles.tabText}>Awards</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.tabButton} onPress={() => router.push('/(tabs)/CastPage')}>
+            <TouchableOpacity style={styles.tabButton} onPress={() => router.replace('/(tabs)/CastPage')}>
               <Text style={styles.tabText}>Cast</Text>
             </TouchableOpacity>
           </View>
 
-          {/* Movie Details */}
+        
           <View style={styles.detailsSection}>
             <View style={styles.detailItem}>
               <Text style={styles.detailLabel}>Release date</Text>
@@ -138,9 +138,9 @@ const MovieDetail: React.FC = () => {
             </View>
           </View>
 
-          {/* Action Buttons */}
+        
           <View style={styles.actionButtonsContainer}>
-            <TouchableOpacity style={styles.primaryButton} onPress={() => router.push('/(tabs)/WatchList')}>
+            <TouchableOpacity style={styles.primaryButton} onPress={() => router.replace('/(tabs)/WatchList')}>
               <MaterialCommunityIcons name="plus" size={20} color="#000"/>
               <Text style={styles.primaryButtonText}>Watch list</Text>
             </TouchableOpacity>
@@ -150,7 +150,6 @@ const MovieDetail: React.FC = () => {
             </TouchableOpacity>
           </View>
 
-          {/* Screenshots */}
           <View style={styles.screenshotsSection}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <Image 

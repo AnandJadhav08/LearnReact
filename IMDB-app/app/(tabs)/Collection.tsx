@@ -125,7 +125,7 @@ const CollectionPage: React.FC = () => {
     </View>
   );
 
-  // Group movies into rows of 3
+ 
   const groupedMovies = movies.reduce<MovieItem[][]>((rows, movie, index) => {
     if (index % 3 === 0) {
       rows.push([movie]);
@@ -141,14 +141,14 @@ const CollectionPage: React.FC = () => {
               <SafeAreaView style={styles.safeArea}>
           
                 <View style={styles.header}>
-            <TouchableOpacity style={styles.backButton} onPress={() => router.push('/(tabs)/WatchList')}>
+            <TouchableOpacity style={styles.backButton} onPress={() => router.replace('/(tabs)/WatchList')}>
               <MaterialCommunityIcons name="chevron-left" size={34} color="#000" />
             </TouchableOpacity>
             <Text style={styles.imdbLogo}>Create a Collection</Text>
           </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {/* Private Toggle */}
+      
         <View style={styles.privateContainer}>
           <Switch
             value={isPrivate}
@@ -160,7 +160,7 @@ const CollectionPage: React.FC = () => {
           <Text style={styles.privateLabel}>Private</Text>
         </View>
 
-        {/* Collection Name Input */}
+       
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.textInput}
@@ -171,7 +171,7 @@ const CollectionPage: React.FC = () => {
           />
         </View>
 
-        {/* Description Input */}
+    
         <View style={styles.inputContainer}>
           <TextInput
             style={[styles.textInput, styles.descriptionInput]}
@@ -185,7 +185,6 @@ const CollectionPage: React.FC = () => {
           />
         </View>
 
-        {/* Add from here section */}
         <View style={styles.addFromHereContainer}>
           <View style={styles.addFromHereHeader}>
             <Text style={styles.addFromHereTitle}>Add from here</Text>
@@ -194,7 +193,7 @@ const CollectionPage: React.FC = () => {
             </TouchableOpacity>
           </View>
 
-          {/* Movies Grid */}
+    
           <FlatList
             data={groupedMovies}
             renderItem={renderRow}

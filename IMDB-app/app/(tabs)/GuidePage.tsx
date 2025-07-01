@@ -91,19 +91,18 @@ const GuidePage: React.FC = () => {
           <SafeAreaView style={styles.safeArea}>
       
             <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.push('/(tabs)/MovieDetail')}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.replace('/(tabs)/MovieDetail')}>
           <MaterialCommunityIcons name="chevron-left" size={34} color="#000" />
         </TouchableOpacity>
         <Text style={styles.imdbLogo}>Parent Guide</Text>
       </View>
 
       <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-        {/* Show Title */}
+   
         <View style={styles.titleSection}>
           <Text style={styles.showTitle}>House of the Dragon</Text>
         </View>
 
-        {/* Spoiler Warning */}
         <View style={styles.spoilerSection}>
           <View style={styles.spoilerHeader}>
             <MaterialCommunityIcons name="alert" size={16} color="#FF6B6B" />
@@ -114,7 +113,6 @@ const GuidePage: React.FC = () => {
           </Text>
         </View>
 
-        {/* Content Warnings */}
         <View style={styles.warningsContainer}>
           {contentWarnings.map(renderContentWarning)}
         </View>

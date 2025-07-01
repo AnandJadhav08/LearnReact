@@ -60,7 +60,7 @@ const SignUpScreen: React.FC = () => {
     if (validateForm()) {
       Alert.alert('Success', 'Account created successfully!');
     }
-    router.push('/(tabs)/VerifyScreen');
+    router.replace('/(tabs)/VerifyScreen');
   };
 
   const handleGoogleSignUp = () => {
@@ -72,7 +72,7 @@ const SignUpScreen: React.FC = () => {
   };
 
   const handleLogin = () => {
-  router.push('/(tabs)/SignInScreen');
+  router.replace('/(tabs)/SignInScreen');
   };
 
   const handleTermsOfUse = () => {

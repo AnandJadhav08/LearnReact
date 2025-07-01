@@ -22,13 +22,13 @@ const ForgetpwScreen: React.FC= () => {
 
 
   const handleContinue = (): void => {
-    router.push('/(tabs)/ResetpwScreen');
+    router.replace('/(tabs)/ResetpwScreen');
   };
 
 
   const handleBack = (): void => {
    Alert.alert('Back To Previous Screen');
-   router.push('/(tabs)/SignInScreen');
+   router.replace('/(tabs)/SignInScreen');
 
   };
 

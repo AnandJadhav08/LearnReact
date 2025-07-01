@@ -18,16 +18,16 @@ const SignInScreen: React.FC= () => {
     }
 
     Alert.alert('Login', `Attempting to login with email: ${email}`);
-    router.push('/HomeScreen');
+    router.replace('/');;
   };
 
   const handleForgotPassword = (): void => {
     Alert.alert('Forgot Password', 'Password reset functionality would go here');
-    router.push('/(tabs)/ForgetpwScreen');
+    router.replace('/(tabs)/ForgetpwScreen');
   };
 
   const handleCreateAccount = (): void => {
-    router.push('/(tabs)/SignUpScreen');
+    router.replace('/(tabs)/SignUpScreen');
   };
 
   const handleTermsOfUse = (): void => {
