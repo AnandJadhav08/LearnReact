@@ -4,7 +4,10 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Carousel from 'react-native-reanimated-carousel';
 import { useRouter } from 'expo-router';
 import MovieCard from '@/components/MovieCard';
+ import UpcomingMovies from '@/components/UpcomingMovies';
+import PopularMovies from '@/components/PopularMovies';
 import {featuredMovies, topMovies, upcomingMovies, recommendedMovies} from '@/utils/MovieData';
+import TopTenMovies from '@/components/TopTenMovies';
 
 
 export default function HomeScreen(): JSX.Element {
@@ -84,7 +87,9 @@ export default function HomeScreen(): JSX.Element {
                 <Text style={styles.seeMoreLink}>See More</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.moviesScroll}>
+            <TopTenMovies/>
+
+            {/* <View style={styles.moviesScroll}>
               <FlatList
                 data={topMovies}
                 keyExtractor={(item, index) => index.toString()}
@@ -94,7 +99,7 @@ export default function HomeScreen(): JSX.Element {
                   <MovieCard title={item.title} image={item.image} />
                 )}
               />
-            </View>
+            </View> */}
           </View>
 
           <View style={styles.section}>
@@ -104,17 +109,20 @@ export default function HomeScreen(): JSX.Element {
                 <Text style={styles.seeMoreLink}>See More</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.moviesScroll}>
+
+            <UpcomingMovies/>
+            
+            {/* <View style={styles.moviesScroll}>
               <FlatList
                 data={upcomingMovies}
                 keyExtractor={(item, index) => index.toString()}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
-                  <MovieCard title={item.title} image={item.image} />
+                  <MovieCard title={item.title} image={item.image}/>
                 )}
               />
-            </View>
+            </View> */}
           </View>
 
 
@@ -125,7 +133,9 @@ export default function HomeScreen(): JSX.Element {
                 <Text style={styles.seeMoreLink}>See More</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.moviesScroll}>
+              <PopularMovies/>
+
+            {/* <View style={styles.moviesScroll}>
               <FlatList
                 data={recommendedMovies}
                 keyExtractor={(item, index) => index.toString()}
@@ -135,7 +145,7 @@ export default function HomeScreen(): JSX.Element {
                   <MovieCard title={item.title} image={item.image} />
                 )}
               />
-            </View>
+            </View> */}
           </View>
         </ScrollView>
       </SafeAreaView>

@@ -15,10 +15,7 @@ type RootStackParamList = {
   Flatlist: undefined;
 };
 
-type FlatlistScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'Flatlist'
->;
+type FlatlistScreenNavigationProp = NativeStackNavigationProp<RootStackParamList,'Flatlist'>;
 
 const DATA = [
   {

@@ -3,6 +3,7 @@ import {View,Text,TextInput,ScrollView,TouchableOpacity,StyleSheet,StatusBar,Saf
 import { moviesShows } from '@/components/MovieArray';  
 import { Ionicons } from '@expo/vector-icons';
 import ShowsCard from '@/components/ShowsCard';
+import { router } from 'expo-router';
 
 export type MovieShow = {
   id: string;
@@ -13,28 +14,10 @@ export type MovieShow = {
 
 const Browser: React.FC = () => {
 
-  //const categories = ['Videos', 'TV Shows', 'Streaming', 'News'];
 
   const [activeTab, setActiveTab] = useState('All Shows');
   const [searchText, setSearchText] = useState('');
  
-
-  // const renderCategoryItem = ({ item }: { item: string }) => (
-  //     <TouchableOpacity style={styles.categoryButton}>
-  //       <Text style={styles.categoryText}>{item}</Text>
-  //     </TouchableOpacity>
-  //   );
-
-  // const renderMovieItem = (item: MovieShow) => (
-  //   <TouchableOpacity key={item.id} style={styles.movieItem}>
-  //     <Image source={{ uri: item.image }} style={styles.movieImage} />
-  //     <View style={styles.movieInfo}>
-  //       <Text style={styles.movieTitle}>
-  //         {item.title} {item.year && `(${item.year})`}
-  //       </Text>
-  //     </View>
-  //   </TouchableOpacity>
-  // );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,23 +35,12 @@ const Browser: React.FC = () => {
             placeholderTextColor="#666"
           />
         </View>
-        <TouchableOpacity style={styles.filterButton}>
-          <Ionicons name="options-outline" size={20} color="#666" />
+        <TouchableOpacity style={styles.filterButton} onPress={() => {router.push('/(tabs)/Filter')}}>
+          <Ionicons name="filter" size={20} color="#666" />
         </TouchableOpacity>
       </View>
 
-{/* <View style={styles.contentContainer}>
-               <View style={styles.categoriesContainer}>
-                       <FlatList
-                         data={categories}
-                         renderItem={renderCategoryItem}
-                         keyExtractor={(item) => item}
-                         horizontal
-                         showsHorizontalScrollIndicator={false}
-                         contentContainerStyle={styles.categoriesList}
-                       />
-                     </View>
-</View> */}
+
 
 
       <View style={styles.categoriesContainer}>

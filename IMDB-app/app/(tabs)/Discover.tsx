@@ -1,123 +1,194 @@
-import React, { JSX } from 'react';
-import {View,Text,SafeAreaView,StatusBar,StyleSheet, ScrollView, TouchableOpacity,FlatList} from 'react-native';
+import React, {JSX, useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import MovieCard from '@/components/MovieCard';
-import {mostwatchedInterviews , mostwatchedTrailers, mostwatchedTVshows}  from '@/utils/MovieData';
-// import { useRouter } from 'expo-router';
-
-
-// interface MovieProps {
-//   title: string;
-//   image: string;
-// }
-
-
-// const MovieCard: React.FC<MovieProps> = ({ title, image }) => (
-//   <TouchableOpacity style={styles.movieCard}>
-//     <Image source={{ uri: image }} style={styles.movieImage} />
-//     <Text style={styles.movieTitle}>{title}</Text>
-//   </TouchableOpacity>
-// );
 
 export default function Discover(): JSX.Element {
+  const [selectedTab, setSelectedTab] = useState('All');
+  const [topRated, setTopRated] = useState([]);
+  const [upcoming, setUpcoming] = useState([]);
+  const [popular, setPopular] = useState([]);
 
-   //const router = useRouter();
+  const tabs = ['Videos', 'TV Shows', 'Streaming', 'News'];
 
-  const categories = ['Videos', 'TV Shows', 'Streaming', 'News'];
+  useEffect(() => {
+    const fetchData = async () => {
+      const headers = {
+        accept: 'application/json',
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYTg1YjRmMTM1MWI1Y2QzYjdiM2FjNDJiZTgwZTc5NSIsIm5iZiI6MTc1MTM1ODk4Mi4wMjQ5OTk5LCJzdWIiOiI229wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.aq0SKmVH5s03ypQyRo2j4-qk_P2IFoI92n9Yjq9XzVs',
+      };
 
- 
+      try {
+        const [topRatedRes, upcomingRes, popularRes] = await Promise.all([
+          fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', { headers }),
+          fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', { headers }),
+          fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', { headers }),
+        ]);
 
+        const topRatedData = await topRatedRes.json();
+        const upcomingData = await upcomingRes.json();
+        const popularData = await popularRes.json();
 
-  const renderCategoryItem = ({ item }: { item: string }) => (
-    <TouchableOpacity style={styles.categoryButton}>
-      <Text style={styles.categoryText}>{item}</Text>
-    </TouchableOpacity>
-  );
+        setTopRated(topRatedData.results || []);
+        setUpcoming(upcomingData.results || []);
+        setPopular(popularData.results || []);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const getFilteredData = () => {
+    switch (selectedTab) {
+      case 'Top Rated':
+        return topRated;
+      case 'Upcoming':
+        return upcoming;
+      case 'Popular':
+        return popular;
+      default:
+        return [...topRated, ...upcoming, ...popular];
+    }
+  };
 
   return (
     <View style={styles.outerContainer}>
       <StatusBar barStyle="dark-content" backgroundColor="#F5C842" />
       <SafeAreaView style={styles.safeArea}>
         <ScrollView>
-        <View style={styles.header}>
-          <Text style={styles.imdbLogo}>Discover</Text> 
-        </View>
-
-      <View style={styles.categoriesContainer}>
-        <FlatList
-          data={categories}
-          renderItem={renderCategoryItem}
-          keyExtractor={(item) => item}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.categoriesList}
-        />
-      </View>
-
-          <View style={styles.section}>
-            <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Most Watched Trailers</Text>
-              <TouchableOpacity>
-                <Text style={styles.seeMoreLink}>See More</Text>
-              </TouchableOpacity>
-            </View>
-           <View style={styles.moviesScroll}>
-      <FlatList
-        data={mostwatchedTrailers}
-        keyExtractor={(item, index) => index.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <MovieCard title={item.title} image={item.image} />
-        )}
-      />
-    </View>
+          <View style={styles.header}>
+            <Text style={styles.imdbLogo}>Discover</Text>
           </View>
 
+       
+          <View style={styles.categoriesContainer}>
+            <FlatList
+              data={tabs}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={[
+                    styles.categoryButton,
+                    selectedTab === item && { backgroundColor: '#F5C842' },
+                  ]}
+                  onPress={() => setSelectedTab(item)}
+                >
+                  <Text
+                    style={[
+                      styles.categoryText,
+                      selectedTab === item && { color: '#000', fontWeight: 'bold' },
+                    ]}
+                  >
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              )}
+              keyExtractor={(item) => item}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.categoriesList}
+            />
+          </View>
+
+         
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Most Watched Interviews</Text>
+              <Text style={styles.sectionTitle}>Trailers</Text>
               <TouchableOpacity>
                 <Text style={styles.seeMoreLink}>See More</Text>
               </TouchableOpacity>
             </View>
-           <View style={styles.moviesScroll}>
-      <FlatList
-        data={mostwatchedInterviews}
-        keyExtractor={(item, index) => index.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <MovieCard title={item.title} image={item.image} />
-        )}
-      />
-    </View>
+            <View style={styles.moviesScroll}>
+              <FlatList
+                data={getFilteredData()}
+                keyExtractor={(item, index) => item.id?.toString() ?? index.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <MovieCard
+                    title={item.title}
+                    image={
+                      item.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                        : 'https://via.placeholder.com/300x450?text=No+Image'
+                    }
+                  />
+                )}
+              />
+            </View>
           </View>
 
 
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Most Watched TV shows</Text>
+              <Text style={styles.sectionTitle}>Interviews</Text>
               <TouchableOpacity>
                 <Text style={styles.seeMoreLink}>See More</Text>
               </TouchableOpacity>
             </View>
-           <View style={styles.moviesScroll}>
-      <FlatList
-        data={mostwatchedTVshows}
-        keyExtractor={(item, index) => index.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <MovieCard title={item.title} image={item.image} />
-        )}
-      />
-    </View>
+            <View style={styles.moviesScroll}>
+              <FlatList
+                data={getFilteredData()}
+                keyExtractor={(item, index) => item.id?.toString() ?? index.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <MovieCard
+                    title={item.title}
+                    image={
+                      item.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                        : 'https://via.placeholder.com/300x450?text=No+Image'
+                    }
+                  />
+                )}
+              />
+            </View>
+          </View>
+
+
+          <View style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>TV shows</Text>
+              <TouchableOpacity>
+                <Text style={styles.seeMoreLink}>See More</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.moviesScroll}>
+              <FlatList
+                data={getFilteredData()}
+                keyExtractor={(item, index) => item.id?.toString() ?? index.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <MovieCard
+                    title={item.title}
+                    image={
+                      item.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                        : 'https://via.placeholder.com/300x450?text=No+Image'
+                    }
+                  />
+                )}
+              />
+            </View>
           </View>
         </ScrollView>
       </SafeAreaView>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   outerContainer: {

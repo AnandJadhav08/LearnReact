@@ -5,6 +5,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 type MovieCardProps = {
   image: string;
   title: string;
+  poster_path: string;
   onPress?: () => void;
 };
 

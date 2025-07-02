@@ -11,6 +11,7 @@ import TaskScreen from './TaskScreen'
 import UseEffectScreen from './useEffectScreen'
 import LoginScreen from './LoginScreen'
 import FlatlistScreen from './FlatlistScreen'
+import AsyncStorage from './AsyncStorage'
 
 
 export type HomeStackParamList = {
@@ -20,6 +21,7 @@ export type HomeStackParamList = {
   UseEffect: undefined
   Login: undefined
   Flatlist: undefined
+  AsyncStorage: undefined
 }
 
 type HomeMainNavProp = NativeStackNavigationProp<HomeStackParamList, 'HomeMain'>
@@ -120,6 +122,15 @@ const HomeScreen: React.FC = () => {
           headerBackTitle: 'Home'
         }}
       />
+      <HomeStack.Screen
+          name="AsyncStorage"
+          component={AsyncStorage}
+          options={{
+              title: 'AsyncStorage Screen',
+              headerBackTitle: 'Home'
+          }}
+       />
+
     </HomeStack.Navigator>
   )
 }

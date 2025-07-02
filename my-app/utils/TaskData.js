@@ -4,7 +4,7 @@ const TaskData = [
   { title: 'Task 3: UseEffect Hook Examples', screen: 'UseEffect' },
   { title: 'Task 4: USeState Of Hook Example', screen: 'Calculator' },
   { title: 'Task 5: Use Of FlatList', screen: 'Flatlist' },
-  { title: 'Task 6: USe Of Drawer', screen: '' },
+  { title: 'Task 6: AsyncStorage Use', screen: 'AsyncStorage' },
   { title: 'Task 7: Use Of Tab', screen: '' },
 ]
 

@@ -22,7 +22,7 @@ const VerifyScreen: React.FC= () => {
 
 
   const handleContinue = (): void => {
-    router.replace('/(tabs)/HomeScreen');
+    router.replace('/');
   };
 
 

@@ -1,8 +1,10 @@
 import React from 'react';
 import {View,Text,Image,TouchableOpacity,SafeAreaView,StyleSheet,StatusBar,FlatList,} from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-interface NotificationItem {
+
+
+export type NotificationItem = {
   id: string;
   title: string;
   timeAgo: string;
@@ -106,7 +108,7 @@ const Notification: React.FC = () => {
 
       <View style={styles.markAllContainer}>
         <TouchableOpacity style={styles.hamburgerButton}>
-          <MaterialCommunityIcons name="menu" size={24} color="#000000" />
+          <Ionicons name="filter" size={24} color="#000000" />
         </TouchableOpacity>
         <TouchableOpacity>
           <Text style={styles.markAllText}>Mark all as read</Text>
