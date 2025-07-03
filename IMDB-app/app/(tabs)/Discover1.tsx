@@ -1,6 +1,6 @@
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import React, { JSX, useState } from 'react';
-import {View,Text,SafeAreaView,StatusBar,StyleSheet, ScrollView,TouchableOpacity,} from 'react-native';
+import {View,Text,SafeAreaView,StatusBar,StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import UpcomingMovies from '@/components/UpcomingMovies';
 import TopTenMovies from '@/components/TopTenMovies';
 import PopularMovies from '@/components/PopularMovies';
@@ -8,9 +8,9 @@ import PopularMovies from '@/components/PopularMovies';
 
 export default function Discover(): JSX.Element {
 
-  const router = useRouter();
-  const [activeTab, setActiveTab] = useState('Viideos');;
-  
+   //const router = useRouter();
+    const [activeTab, setActiveTab] = useState('Viideos');;
+
   return (
     <View style={styles.outerContainer}>
       <StatusBar barStyle="dark-content" backgroundColor="#F5C418" />
@@ -22,7 +22,7 @@ export default function Discover(): JSX.Element {
           
                      
                           <View style={styles.tabContainer}>
-                            <TouchableOpacity style={[styles.tabButton, styles.tab, activeTab === 'Videos' && styles.activeTab]} onPress={() => router.push('/(tabs)/Discover1')}>
+                            <TouchableOpacity style={[styles.tabButton, styles.tab, activeTab === 'Videos' && styles.activeTab]} onPress={() => router.push('/')}>
                             <Text style={styles.tabText}>Videos</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[styles.tabButton, styles.tab, activeTab === 'TV Shows' && styles.activeTab]} onPress={() => setActiveTab('TV Shows')} >
@@ -39,32 +39,32 @@ export default function Discover(): JSX.Element {
 
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Most Watched Trailers</Text>
+              <Text style={styles.sectionTitle}>Trailers</Text>
               <TouchableOpacity>
                 <Text style={styles.seeMoreLink}>See More</Text>
               </TouchableOpacity>
             </View>
-            <TopTenMovies />
+           <TopTenMovies />
           </View>
 
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Most Watched Interviews</Text>
+              <Text style={styles.sectionTitle}>Interviews</Text>
               <TouchableOpacity>
                 <Text style={styles.seeMoreLink}>See More</Text>
               </TouchableOpacity>
             </View>
-            <UpcomingMovies/>
+           <PopularMovies />
           </View>
 
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Most Watched TV shows</Text>
+              <Text style={styles.sectionTitle}>TV shows</Text>
               <TouchableOpacity>
                 <Text style={styles.seeMoreLink}>See More</Text>
               </TouchableOpacity>
             </View>
-            <PopularMovies />
+            <UpcomingMovies />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#000000',
   },
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     backgroundColor: '#FFFFFF',
   },
-    tabContainer: {
+  tabContainer: {
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
     marginBottom: 8,

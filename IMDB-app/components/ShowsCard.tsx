@@ -9,6 +9,8 @@ type ShowsCardProps = {
 };
 
 const ShowsCard: React.FC<ShowsCardProps> = ({ image, title, year, onPress }) => {
+
+  
   return (
     <TouchableOpacity style={styles.movieItem} onPress={onPress}>
       <Image source={{ uri: image }} style={styles.movieImage} />

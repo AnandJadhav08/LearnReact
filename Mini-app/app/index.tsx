@@ -4,62 +4,23 @@ import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
-import HomeScreen from './(tabs)/HomeScreen';
-import Profile from './(tabs)/Profile';
-import Discover from './(tabs)/Discover';
-import Browser from './(tabs)/Browser';
+import Home from './(tabs)/Home';
+
 
 const Tab = createBottomTabNavigator();
 
-const LoadingScreen = () => (
-  <View style={styles.loadingContainer}>
-    <ActivityIndicator size="large" color="#F5C842" />
-    <Text style={styles.loadingText}>Loading...</Text>
-  </View>
-);
 
 export default function Index() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
-
+   
   useEffect(() => {
-    checkAuthStatus();
+   
   }, []);
 
-  const checkAuthStatus = async () => {
-    try {
-    
-      const userToken = await AsyncStorage.getItem('userToken');
-      const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
-      const userData = await AsyncStorage.getItem('userData');
-
-      if (userToken || isLoggedIn === 'true' || userData) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-        router.replace('/(tabs)/SignInScreen');
-      }
-    } catch (error) {
-      console.error('Error checking auth status:', error);
-      setIsAuthenticated(false);
-      router.replace('/(tabs)/SignInScreen');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
-  if (!isAuthenticated) {
-    return null;
-  }
+  
 
   return (
     <Tab.Navigator 
-      initialRouteName='HomeScreen'
+      initialRouteName='Home'
       screenOptions={({ route }) => ({
         tabBarStyle: {
           backgroundColor: '#000000',
@@ -74,8 +35,8 @@ export default function Index() {
       })}
     >
       <Tab.Screen 
-        name="HomeScreen"
-        component={HomeScreen}
+        name="Home"
+        component={Home}
         options={{ 
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (

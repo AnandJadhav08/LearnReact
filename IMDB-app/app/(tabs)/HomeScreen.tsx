@@ -4,6 +4,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Carousel from 'react-native-reanimated-carousel';
 import { useRouter } from 'expo-router';
 import MovieCard from '@/components/MovieCard';
+import HeaderMovies from '@/components/HeaderMovies';
  import UpcomingMovies from '@/components/UpcomingMovies';
 import PopularMovies from '@/components/PopularMovies';
 import {featuredMovies, topMovies, upcomingMovies, recommendedMovies} from '@/utils/MovieData';
@@ -30,7 +31,7 @@ export default function HomeScreen(): JSX.Element {
         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
 
           <View style={styles.carouselContainer}>
-            <Carousel
+            {/* <Carousel
               loop
               autoPlay
               autoPlayInterval={4000}
@@ -53,7 +54,9 @@ export default function HomeScreen(): JSX.Element {
                   </View>
                 </View>
               )}
-            />
+            /> */}
+
+            <HeaderMovies/>
           </View>
 
 
@@ -88,6 +91,7 @@ export default function HomeScreen(): JSX.Element {
               </TouchableOpacity>
             </View>
             <TopTenMovies/>
+           
 
             {/* <View style={styles.moviesScroll}>
               <FlatList

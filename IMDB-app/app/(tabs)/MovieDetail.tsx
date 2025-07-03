@@ -70,7 +70,9 @@ const MovieDetail: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#000" />
-      
+      <TouchableOpacity style={styles.backbutton} onPress={() => router.replace('/')}>
+        <MaterialCommunityIcons  name= "chevron-left" size={34} color="#fff"/>
+      </TouchableOpacity>
       <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
      
         <View style={styles.featuredSection}>
@@ -255,6 +257,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 12,
   },
+  backbutton: {
+    marginRight:20,
+    marginTop:30
+  }, 
   statItem: {
     flexDirection: 'row',
     alignItems: 'center',

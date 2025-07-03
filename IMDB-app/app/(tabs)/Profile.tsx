@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import UpcomingMovies from "@/components/UpcomingMovies";
 
 
 interface MovieProps {
@@ -18,20 +19,20 @@ const MovieCard: React.FC<MovieProps> = ({ title, image }) => (
 
 const Profile = () => {
 
-  const topMovies = [
-    { title: 'Minecraft', 
-      image: 'https://i.ebayimg.com/images/g/wdIAAOSwcRxn7RxD/s-l1200.jpg'
-     },
-    { title: 'Thor: Love and Thunder', 
-      image: 'https://m.media-amazon.com/images/M/MV5BZjRiMDhiZjQtNjk5Yi00ZDcwLTkyYTEtMDc1NjdmNjFhNGIzXkEyXkFqcGc@._V1_.jpg' 
-    },
-   { title: 'Elemental', 
-      image: 'https://i0.wp.com/pixarpost.com/wp-content/uploads/2023/06/Elemental-Real-3D-Payoff-Poster.jpg?resize=1200%2C1778&ssl=1' 
-    },
-    { title: 'The Croods', 
-     image: 'https://wallpaper.dog/large/10825231.jpg' 
-   },
-  ];
+  // const topMovies = [
+  //   { title: 'Minecraft', 
+  //     image: 'https://i.ebayimg.com/images/g/wdIAAOSwcRxn7RxD/s-l1200.jpg'
+  //    },
+  //   { title: 'Thor: Love and Thunder', 
+  //     image: 'https://m.media-amazon.com/images/M/MV5BZjRiMDhiZjQtNjk5Yi00ZDcwLTkyYTEtMDc1NjdmNjFhNGIzXkEyXkFqcGc@._V1_.jpg' 
+  //   },
+  //  { title: 'Elemental', 
+  //     image: 'https://i0.wp.com/pixarpost.com/wp-content/uploads/2023/06/Elemental-Real-3D-Payoff-Poster.jpg?resize=1200%2C1778&ssl=1' 
+  //   },
+  //   { title: 'The Croods', 
+  //    image: 'https://wallpaper.dog/large/10825231.jpg' 
+  //  },
+  // ];
 
   return (
     <View style={styles.container}>
@@ -54,7 +55,7 @@ const Profile = () => {
           <Text style={styles.linkText}>Watchlist</Text>
           <Ionicons name="chevron-forward" size={20} />
         </TouchableOpacity>
-                   <View style={styles.moviesScroll}>
+                   {/* <View style={styles.moviesScroll}>
                        <FlatList
                          data={topMovies}
                          keyExtractor={(item, index) => index.toString()}
@@ -64,7 +65,9 @@ const Profile = () => {
                            <MovieCard title={item.title} image={item.image} />
                          )}
                        />
-              </View>
+              </View> */}
+
+              <UpcomingMovies/>
         <View>
 
         <TouchableOpacity style={styles.linkRow}>

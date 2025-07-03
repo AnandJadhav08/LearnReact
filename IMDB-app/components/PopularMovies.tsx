@@ -1,5 +1,5 @@
 import React, { JSX, useEffect } from "react";
-import { FlatList, View, Image, Text, StyleSheet } from "react-native";
+import { FlatList, View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import axios from 'axios';
 export default function PopularMovies(): JSX.Element {
 
@@ -15,7 +15,8 @@ export default function PopularMovies(): JSX.Element {
     })
      .then((data) => {
         if(data.data){
-            setMovies(data.data.results)
+            setMovies(data.data.results);
+            setLoading(false);
         }
         else{
             console.log('Error fetching movies');
@@ -37,8 +38,10 @@ export default function PopularMovies(): JSX.Element {
                   showsHorizontalScrollIndicator={false}
                   renderItem={({ item }: { item: { poster_path: string; title: string } }) => (
                    <View style={styles.movieCard}>
+                    <TouchableOpacity>
                     <Image source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }} style={styles.movieImage} />
                     <Text numberOfLines={1} style={styles.movieTitle}>{item.title}</Text>
+                    </TouchableOpacity>
                    </View>
                   )}
                 />
