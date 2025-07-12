@@ -1,5 +1,9 @@
+import { ReactNode } from "react";
+
 // types/book.ts
 export interface Book {
+  industryIdentifiers: boolean;
+  subtitle: ReactNode;
   id: string;
   title: string;
   authors?: string[];

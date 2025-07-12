@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const favorites = () => {
+const BookDetail = () => {
   return (
     <View>
-      <Text>favorites</Text>
+    <Text> BookDetail</Text> 
     </View>
   )
 }
 
-export default favorites
+export default BookDetail
 
 const styles = StyleSheet.create({})
