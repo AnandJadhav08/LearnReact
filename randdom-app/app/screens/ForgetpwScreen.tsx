@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
-import { useRouter } from 'expo-router';
 import {View,Text,TextInput,TouchableOpacity,StyleSheet,SafeAreaView,StatusBar,Alert,} from 'react-native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+
+type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+  Home: undefined;
+  Forgetpw: undefined;
+  Verify: undefined;
+  Resetpw: undefined;
+};  
+type ForgetpwNavProp = NativeStackNavigationProp<RootStackParamList, 'Forgetpw'>;
 
 const ForgetpwScreen: React.FC= () => {
 
-    const router = useRouter();
-
+  const navigation = useNavigation<ForgetpwNavProp>();
 
   const [email , setEmail] = useState<string>('');
 
@@ -22,14 +32,15 @@ const ForgetpwScreen: React.FC= () => {
 
 
   const handleContinue = (): void => {
-    router.push('/ResetpwScreen');
+    // router.push('/ResetpwScreen');
+    navigation.navigate('Resetpw');
   };
 
 
   const handleBack = (): void => {
    Alert.alert('Back To Previous Screen');
-   router.push('/SignInScreen');
-
+  //  router.push('/SignInScreen');
+   navigation.navigate('SignIn');
   };
 
   const handleTermsOfUse = (): void => {

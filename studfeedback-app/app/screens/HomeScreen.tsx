@@ -24,9 +24,9 @@ type HomeNavProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen = () => {
   const navigation = useNavigation<HomeNavProp>();
-  const { students, loading } = useStudents(); 
+  const { students, loading } = useStudents();
 
- 
+
   if (loading) {
     return (
       <View style={styles.loader}>
@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 16,
+    marginTop: 40,
+    padding: 15,
   },
   title: {
     fontSize: 24,

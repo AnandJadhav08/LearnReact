@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {View,Text,TextInput,TouchableOpacity,StyleSheet,SafeAreaView,StatusBar,Alert,KeyboardAvoidingView,Platform,ScrollView,} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
-
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
 type FormData =  {
   username: string;
@@ -12,12 +12,20 @@ type FormData =  {
   rememberMe: boolean;
 } ;
  
+type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+  Home: undefined;
+  Forgetpw: undefined;
+  Verify: undefined;
+};
+type SignUpNavProp = NativeStackNavigationProp<RootStackParamList, 'SignUp'>;
 
 
 const SignUpScreen: React.FC = () => {
 
-    const router = useRouter();
- 
+  const navigation = useNavigation<SignUpNavProp>();
+
   const [formData, setFormData] = useState<FormData>({
     username: '',
     email: '',
@@ -60,7 +68,8 @@ const SignUpScreen: React.FC = () => {
     if (validateForm()) {
       Alert.alert('Success', 'Account created successfully!');
     }
-    router.push('/VerifyScreen');
+    // router.push('/VerifyScreen');
+    navigation.navigate('Verify');
   };
 
   const handleGoogleSignUp = () => {
@@ -72,7 +81,8 @@ const SignUpScreen: React.FC = () => {
   };
 
   const handleLogin = () => {
-  router.push('/SignInScreen');
+  // router.push('/SignInScreen');
+  navigation.navigate('SignIn');
   };
 
   const handleTermsOfUse = () => {

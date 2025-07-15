@@ -162,12 +162,12 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginTop: 40,
     textAlign: 'center',
   },
   label: {
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 20,
   },
   input: {
     borderWidth: 1,

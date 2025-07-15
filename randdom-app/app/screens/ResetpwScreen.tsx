@@ -1,34 +1,49 @@
 import React, { useState } from 'react';
-import { useRouter } from 'expo-router';
 import {View,Text,TextInput,TouchableOpacity,StyleSheet,SafeAreaView,StatusBar,Alert,} from 'react-native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
-const SignInScreen: React.FC= () => {
+type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+  Home: undefined;
+  Forgetpw: undefined;
+  Verify: undefined;
+  Resetpw: undefined;
+};
 
-    const router = useRouter();
+type ResetpwNavProp = NativeStackNavigationProp<RootStackParamList, 'Resetpw'>;
+
+const ResetpwScreen: React.FC= () => {
+
+  const navigation = useNavigation<ResetpwNavProp>();
+
+  const [newpw, setNewPw] = useState<string>('');
+  const [confirmpw, setConfirmPw] = useState<string>('');
 
 
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [rememberMe, setRememberMe] = useState<boolean>(false);
-
-  const handleLogin = (): void => {
-    if (!email || !password) {
+  const handleNewPassword = (): void => {
+    if (!newpw || !confirmpw) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
 
-    Alert.alert('Login', `Attempting to login with email: ${email}`);
-    router.push('/(tabs)/Home');
+    Alert.alert('Login', `Attempting to New Password: ${newpw} and password: ${confirmpw}`);
   };
 
-  const handleForgotPassword = (): void => {
-    Alert.alert('Forgot Password', 'Password reset functionality would go here');
-    router.push('/ForgetpwScreen');
-  };
-
-  const handleCreateAccount = (): void => {
-    router.push('/SignUpScreen');
-  };
+    const handleContinue = (): void => {
+      // router.push('/SignInScreen');
+      navigation.navigate('SignIn');
+    };
+  
+  
+    const handleBack = (): void => {
+     Alert.alert('Back To Previous Screen');
+    //  router.push('/SignInScreen');
+         navigation.navigate('SignIn');
+  
+    };
+  
 
   const handleTermsOfUse = (): void => {
     Alert.alert('Terms of Use', 'Terms of Use would be displayed here');
@@ -49,15 +64,16 @@ const SignInScreen: React.FC= () => {
 
      
       <View style={styles.content}>
-        <Text style={styles.title}>Sign in</Text>
+        <Text style={styles.title}>Reset Password</Text>
 
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="New Password"
           placeholderTextColor="#999"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
+          value={newpw}
+          onChangeText={setNewPw}
+          onPress={handleNewPassword}
+          keyboardType="numeric"
           autoCapitalize="none"
           autoCorrect={false}
         />
@@ -65,48 +81,25 @@ const SignInScreen: React.FC= () => {
       
         <TextInput
           style={styles.input}
-          placeholder="Password"
+          placeholder="Confirm Password"
           placeholderTextColor="#999"
-          value={password}
-          onChangeText={setPassword}
+          value={confirmpw}
+          onChangeText={setConfirmPw}
           secureTextEntry
           autoCapitalize="none"
           autoCorrect={false}
         />
 
-       
-        <View style={styles.optionsRow}>
-          <TouchableOpacity
-            style={styles.rememberMeContainer}
-            onPress={() => setRememberMe(!rememberMe)}
-          >
-            <View style={[styles.checkbox, rememberMe && styles.checkboxChecked]}>
-              {rememberMe && <Text style={styles.checkmark}>✓</Text>}
-            </View>
-            <Text style={styles.rememberMeText}>Remember Me</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={handleForgotPassword}>
-            <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-          </TouchableOpacity>
-        </View>
+     
 
     
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>Login</Text>
-        </TouchableOpacity>
-
-      
-        <View style={styles.dividerContainer}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>New to IMDb?</Text>
-          <View style={styles.dividerLine} />
-        </View>
-
-      
-        <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
-          <Text style={styles.createAccountButtonText}>Create Account</Text>
-        </TouchableOpacity>
+        <TouchableOpacity style={styles.ContinueButton} onPress={handleContinue}>
+                 <Text style={styles.ContinueButtonText}>Continue</Text>
+               </TouchableOpacity>
+             
+               <TouchableOpacity style={styles.BackButton} onPress={handleBack}>
+                 <Text style={styles.BackButtonText}>Back</Text>
+               </TouchableOpacity>
       </View>
 
       
@@ -131,6 +124,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5C842',
     paddingVertical: 40,
     alignItems: 'center',
+  },
+   subtitle: {
+    fontSize: 16,
+    color: '#666666',
+    marginBottom: 30,
+    textAlign: 'center',
   },
   imdbLogo: {
     fontSize: 24,
@@ -215,37 +214,51 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: '#F5C842',
+    backgroundColor: '#CCCCCC',
   },
   dividerText: {
     marginHorizontal: 15,
     fontSize: 16,
     color: '#666666',
   },
-  createAccountButton: {
+  ContinueButton: {
     backgroundColor: '#000000',
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',
- 
+    marginBottom: 18,
+    marginTop: 30,
   },
-  createAccountButtonText: {
+  ContinueButtonText: {
     fontSize: 18,
     fontWeight: '600',
     color: '#FFFFFF',
   },
+  BackButton: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 12,
+    borderWidth: 1,
+    borderColor: '#CCCCCC',
+    borderStartStartRadius: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  BackButtonText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#000000',
+  },
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 200,
-    marginBottom: 38,
+    marginBottom: 300,
   },
   footerText: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#666666',
     textDecorationLine: "underline",
+
   },
 });
 
-export default SignInScreen;
-
+export default ResetpwScreen;

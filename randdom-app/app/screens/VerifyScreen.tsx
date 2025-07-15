@@ -1,36 +1,47 @@
 import React, { useState } from 'react';
-import { useRouter } from 'expo-router';
 import {View,Text,TextInput,TouchableOpacity,StyleSheet,SafeAreaView,StatusBar,Alert,} from 'react-native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
-const ResetpwScreen: React.FC= () => {
+type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+  Home: undefined;
+  Resetpw: undefined;
+  Forgetpw: undefined;
+  Verify: undefined;
+};
 
-    const router = useRouter();
+type VerifyNavProp = NativeStackNavigationProp<RootStackParamList, 'Verify'>;
 
+const VerifyScreen: React.FC= () => {
 
-  const [newpw, setNewPw] = useState<string>('');
-  const [confirmpw, setConfirmPw] = useState<string>('');
+  const navigation = useNavigation<VerifyNavProp>();
 
+  const [OTP, setOTP] = useState<string>('');
 
-  const handleNewPassword = (): void => {
-    if (!newpw || !confirmpw) {
+  
+
+  const handleOTP = (): void => {
+    if (!OTP) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
 
-    Alert.alert('Login', `Attempting to New Password: ${newpw} and password: ${confirmpw}`);
   };
 
-    const handleContinue = (): void => {
-      router.push('/SignInScreen');
-    };
+
+
+  const handleContinue = (): void => {
+  //  router.push('/(tabs)/HomeScreen');
+   navigation.navigate('Resetpw');
   
-  
-    const handleBack = (): void => {
-     Alert.alert('Back To Previous Screen');
-     router.push('/SignInScreen');
-  
-    };
-  
+  };
+
+
+  const handleResendOTP = (): void => {
+   Alert.alert('OTP Not Fetch Properly So Write According Logic')
+  };
 
   const handleTermsOfUse = (): void => {
     Alert.alert('Terms of Use', 'Terms of Use would be displayed here');
@@ -51,42 +62,32 @@ const ResetpwScreen: React.FC= () => {
 
      
       <View style={styles.content}>
-        <Text style={styles.title}>Reset Password</Text>
-
+        <Text style={styles.title}>Verify email address</Text>
+        <Text style={styles.Subtitle}>To verify your email, We have sent a one Time Password (OTP) to abc123@gmail.com (Change)</Text>
         <TextInput
           style={styles.input}
-          placeholder="New Password"
+          placeholder="Enter OTP here"
           placeholderTextColor="#999"
-          value={newpw}
-          onChangeText={setNewPw}
-          onPress={handleNewPassword}
+          value={OTP}
+          onChangeText={setOTP}
+          onPress={handleOTP}
           keyboardType="numeric"
           autoCapitalize="none"
           autoCorrect={false}
         />
 
+       
       
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm Password"
-          placeholderTextColor="#999"
-          value={confirmpw}
-          onChangeText={setConfirmPw}
-          secureTextEntry
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-
-     
-
-    
+       
         <TouchableOpacity style={styles.ContinueButton} onPress={handleContinue}>
-                 <Text style={styles.ContinueButtonText}>Continue</Text>
-               </TouchableOpacity>
-             
-               <TouchableOpacity style={styles.BackButton} onPress={handleBack}>
-                 <Text style={styles.BackButtonText}>Back</Text>
-               </TouchableOpacity>
+          <Text style={styles.ContinueButtonText}>Continue</Text>
+        </TouchableOpacity>
+      
+        <TouchableOpacity style={styles.ResendOTPButton} onPress={handleResendOTP}>
+          <Text style={styles.ResendOTPButtonText}>Resend OTP</Text>
+        </TouchableOpacity>
+
+
       </View>
 
       
@@ -112,12 +113,6 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
     alignItems: 'center',
   },
-   subtitle: {
-    fontSize: 16,
-    color: '#666666',
-    marginBottom: 30,
-    textAlign: 'center',
-  },
   imdbLogo: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -131,6 +126,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: '600',
+    color: '#000000',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+  Subtitle: {
+    fontSize: 16,
+    fontWeight: '400',
     color: '#000000',
     marginBottom: 30,
     textAlign: 'center',
@@ -155,59 +157,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  checkbox: {
-    width: 20,
-    height: 20,
-    borderWidth: 2,
-    borderColor: '#CCCCCC',
-    marginRight: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkboxChecked: {
-    backgroundColor: '#F5C842',
-    borderColor: '#F5C842',
-  },
-  checkmark: {
-    color: '#000000',
-    fontSize: 12,
-    fontWeight: 'bold',
-  },
-  rememberMeText: {
-    fontSize: 16,
-    color: '#000000',
-  },
-  forgotPasswordText: {
-    fontSize: 16,
-    color: '#0066CC',
-  },
-  loginButton: {
-    backgroundColor: '#F5C842',
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  loginButtonText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#000000',
-  },
-  dividerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#CCCCCC',
-  },
-  dividerText: {
-    marginHorizontal: 15,
-    fontSize: 16,
-    color: '#666666',
-  },
+
   ContinueButton: {
     backgroundColor: '#000000',
     paddingVertical: 12,
@@ -221,7 +171,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#FFFFFF',
   },
-  BackButton: {
+  ResendOTPButton: {
     backgroundColor: '#FFFFFF',
     paddingVertical: 12,
     borderWidth: 1,
@@ -230,7 +180,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
   },
-  BackButtonText: {
+  ResendOTPButtonText: {
     fontSize: 18,
     fontWeight: '600',
     color: '#000000',
@@ -241,11 +191,10 @@ const styles = StyleSheet.create({
     marginBottom: 300,
   },
   footerText: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#666666',
     textDecorationLine: "underline",
-
   },
 });
 
-export default ResetpwScreen;
+export default VerifyScreen;

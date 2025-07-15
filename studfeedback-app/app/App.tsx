@@ -23,9 +23,9 @@ const App = () => {
 
   <StudentProvider>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="AddStudent" component={AddStudentScreen} />
-         <Stack.Screen name="StudentDetails" component={StudentDetailsScreen} />
+          <Stack.Screen name="Home" component={HomeScreen}  options={{headerShown: false,}}/>
+          <Stack.Screen name="AddStudent" component={AddStudentScreen} options={{headerShown: false,}}/>
+         <Stack.Screen name="StudentDetails" component={StudentDetailsScreen} options={{headerShown: false,}}/>
        </Stack.Navigator>
     </StudentProvider>
 

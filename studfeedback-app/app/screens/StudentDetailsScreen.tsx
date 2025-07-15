@@ -207,14 +207,14 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginTop: 40,
     textAlign: 'center',
     color: COLORS.primary,
   },
   label: {
     fontSize: 16,
     fontWeight: '600',
-    marginTop: 10,
+    marginTop: 50,
     color: COLORS.text,
   },
   value: {

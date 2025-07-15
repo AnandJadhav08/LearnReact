@@ -1,101 +1,37 @@
-import React from 'react';
-//import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
-import Home from './(tabs)/Home';
-import { TouchableOpacity } from 'react-native';
-import { router } from 'expo-router';
+import SignInScreen from './screens/SignInScreen';
+import SignUpScreen from './screens/SignUpScreen';
+import ForgetpwScreen from './screens/ForgetpwScreen';
+import VerifyScreen from './screens/VerifyScreen';
+import ResetpwScreen from  './screens/ResetpwScreen';
 
-export type RootStackParamList = {
+type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
   Home: undefined;
-  Discover: undefined;
+  Forgetpw: undefined;
+  Verify: undefined;
+  Resetpw: undefined;
 };
 
-const Tab = createBottomTabNavigator<RootStackParamList>();
- const App = () => {
+const Stack = createNativeStackNavigator<RootStackParamList>();
+const App = () => {
 
   return (
-   <NavigationContainer>
-      <Tab.Navigator initialRouteName='Home'
-    screenOptions={{
-        headerShown: false,
-        tabBarStyle: {
-          backgroundColor: '#000000',
-          borderTopWidth: 0,
-          height: 80,
-          paddingBottom: 10,
-          paddingTop: 10,
-        },
-        tabBarActiveTintColor: '#F5C518', 
-        tabBarInactiveTintColor: '#FFFFFF', 
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: '500',
-          marginTop: 5,
-        },
-      }}>
+   
+    <Stack.Navigator initialRouteName="SignIn">
+      <Stack.Screen name="SignIn" component={SignInScreen} options={{headerShown: false,}}/>
+      <Stack.Screen name="SignUp" component={SignUpScreen} options={{headerShown: false,}}/>
+      <Stack.Screen name="Forgetpw" component={ForgetpwScreen} options={{headerShown: false,}}/>
+      <Stack.Screen name="Verify" component={VerifyScreen} options={{headerShown: false,}}/>
+      <Stack.Screen name="Resetpw" component={ResetpwScreen} options={{headerShown: false,}}/>
+      </Stack.Navigator>
 
-      <Tab.Screen name="Home" 
-      component={Home} 
-      options={{ headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => (
-          <TouchableOpacity onPress={() => router.push('/(tabs)/Home')}>
-            <MaterialCommunityIcons 
-              name={focused ? "home" : "home-outline"} 
-              size={size || 26} 
-              color={color} 
-            />
-            </TouchableOpacity>
-          ),
-       }} />
 
-      {/* <Tab.Screen name="BrowserScreen"   
-      component={BrowserScreen}   
-      options={{ headerShown: false,
-      tabBarIcon: ({ focused, color, size }) => (
-          <TouchableOpacity onPress={() => router.push('/(tabs)/BrowserScreen')}>
-            <MaterialCommunityIcons
-              name={focused ? "magnify-plus" : "magnify"}
-              size={size || 26}
-              color={color}
-            />
-            </TouchableOpacity>
-          ),
-       }} />
-      
-       <Tab.Screen name="DiscoverScreen"   
-      component={DiscoverScreen}   
-      options={{ headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => (
-          <TouchableOpacity onPress={() => router.push('/(tabs)/DiscoverScreen')}>
-            <MaterialCommunityIcons
-              name={focused ? "compass" : "compass-outline"}
-              size={size || 26}
-              color={color}
-            />
-            </TouchableOpacity>
-          )
-
-       }} />
-
-       <Tab.Screen name="ProfileScreen"   
-      component={ProfileScreen}   
-      options={{ headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => (
-          <TouchableOpacity onPress={() => router.push('/(tabs)/ProfileScreen')}>
-            <MaterialCommunityIcons
-              name={focused ? "account" : "account-outline"}
-              size={size || 26}
-              color={color}
-            />
-            </TouchableOpacity>
-          )
-       }} /> */}
-    </Tab.Navigator>
-   </NavigationContainer> 
-  );
-
+  )
 }
 
-export default App;
+export default App
+
