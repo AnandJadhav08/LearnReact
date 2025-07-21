@@ -1,37 +1,30 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import SignInScreen from './screens/SignInScreen';
-import SignUpScreen from './screens/SignUpScreen';
-import ForgetpwScreen from './screens/ForgetpwScreen';
-import VerifyScreen from './screens/VerifyScreen';
-import ResetpwScreen from  './screens/ResetpwScreen';
-
-type RootStackParamList = {
-  SignIn: undefined;
-  SignUp: undefined;
-  Home: undefined;
-  Forgetpw: undefined;
-  Verify: undefined;
-  Resetpw: undefined;
-};
-
-const Stack = createNativeStackNavigator<RootStackParamList>();
-const App = () => {
-
-  return (
-   
-    <Stack.Navigator initialRouteName="SignIn">
-      <Stack.Screen name="SignIn" component={SignInScreen} options={{headerShown: false,}}/>
-      <Stack.Screen name="SignUp" component={SignUpScreen} options={{headerShown: false,}}/>
-      <Stack.Screen name="Forgetpw" component={ForgetpwScreen} options={{headerShown: false,}}/>
-      <Stack.Screen name="Verify" component={VerifyScreen} options={{headerShown: false,}}/>
-      <Stack.Screen name="Resetpw" component={ResetpwScreen} options={{headerShown: false,}}/>
-      </Stack.Navigator>
 
 
-  )
-}
+// import React from 'react';
+// import { SafeAreaView, StyleSheet, useColorScheme } from 'react-native';
+// //  import ContentGenerator from '../components/ContentGenerator';
+// import CaptionGenerator_1 from  '../components/CaptionGenerator_1';
+// import HashtagGenerator_1 from '../components/HashtagGenerator_1';
+// import CalendarPlanner_1 from '../components/CalendarPlanner_1';
 
-export default App
+// const App = () => {
+//   const colorScheme = useColorScheme();
+//   const backgroundColor = colorScheme === 'dark' ? '#1A1A1A' : '#F5F5F5';
 
+//   return (
+//    <SafeAreaView style={[styles.container, { backgroundColor }]}>
+//       {/* <ContentGenerator /> */}
+//       <CalendarPlanner_1/>
+//       <CaptionGenerator_1/>
+//       <HashtagGenerator_1/>
+//     </SafeAreaView>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//   },
+// });
+
+// export default App;

@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "randdom-app",
-    "slug": "randdom-app",
+    "name": "MyApp",
+    "slug": "MyApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "randdomapp",
+    "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -33,8 +33,7 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ],
-      "expo-secure-store"
+      ]
     ],
     "experiments": {
       "typedRoutes": true
